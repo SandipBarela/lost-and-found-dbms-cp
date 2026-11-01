@@ -393,7 +393,7 @@ export default function LandingContent() {
                         Reimagining Campus Recovery
                     </p>
                     <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed font-light">
-                        Every semester, thousands of essential belongings—from laptops and keys to student IDs—are misplaced across lecture halls, libraries, and campus grounds. Our platform eliminates static bulletin boards and fragmented group chats by establishing an authoritative, centralized DBMS-powered system where community members effortlessly collaborate to retrieve what matters most.
+                        Every semester, hundreds of essential belongings—from laptops and keys to student IDs—are misplaced across lecture halls, libraries, and campus grounds. Our platform eliminates static bulletin boards and fragmented group chats by establishing an authoritative, centralized DBMS-powered system where community members effortlessly collaborate to retrieve what matters most.
                     </p>
                 </div>
             </section>
