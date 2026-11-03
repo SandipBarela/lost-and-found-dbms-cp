@@ -10,10 +10,69 @@ import {
     ArrowRight, 
     MapPin, 
     Calendar,
-    Sparkles
+    Sparkles,
+    Undo2,
+    Check,
+    Layers,
+    BookOpen
 } from "lucide-react";
 import ReportModal, { ItemFormData } from "./report-modal";
 import ItemDetailModal from "./item-detail-modal";
+
+const INITIAL_ITEMS = [
+    {
+        id: 1,
+        type: "lost",
+        title: "Apple Watch SE (Silver)",
+        location: "Library 2nd Floor",
+        date: "Today, 2:30 PM",
+        category: "Electronics",
+        prnNumber: "1032210084",
+        division: "Div B - IT",
+        description: "Silver aluminum case with midnight blue sport loop. Lost near the study cubicles.",
+        image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80",
+        status: "Searching"
+    },
+    {
+        id: 2,
+        type: "found",
+        title: "Black Leather Bifold Wallet",
+        location: "Student Center Cafeteria",
+        date: "Yesterday",
+        category: "ID Cards & Wallets",
+        prnNumber: "1032210412",
+        division: "Div A - Mech",
+        description: "Contains a metro card and student gym pass. Handed over to security desk counter 2.",
+        image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80",
+        status: "In Safekeeping"
+    },
+    {
+        id: 3,
+        type: "lost",
+        title: "Dell XPS 15 Charger & Dongle",
+        location: "Engineering Hall B-104",
+        date: "Oct 30",
+        category: "Laptops & Accessories",
+        prnNumber: "1032210992",
+        division: "Div C - CS",
+        description: "130W USB-C charger with a gray 7-in-1 USB adapter cable.",
+        image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80",
+        status: "Reward Offered"
+    },
+    {
+        id: 4,
+        type: "found",
+        title: "Honda Car Key with Dorm FOB",
+        location: "North Parking Lot",
+        date: "Oct 29",
+        category: "Keys & Badges",
+        prnNumber: "1032210156",
+        division: "Div A - Civil",
+        description: "Black car key fob attached to a red woven lanyard with dorm room key 204.",
+        image: "https://images.unsplash.com/photo-1666346166849-8443c47f50fa?auto=format&fit=crop&w=600&q=80",
+        status: "Awaiting Claim"
+    }
+];
 
 export default function LandingContent() {
     const [activeFilter, setActiveFilter] = useState<"all" | "lost" | "found">("all");
@@ -26,60 +85,17 @@ export default function LandingContent() {
     const [detailModalOpen, setDetailModalOpen] = useState(false);
 
     // Dynamic items list stored in state
-    const [items, setItems] = useState([
-        {
-            id: 1,
-            type: "lost",
-            title: "Apple Watch SE (Silver)",
-            location: "Library 2nd Floor",
-            date: "Today, 2:30 PM",
-            category: "Electronics",
-            prnNumber: "1032210084",
-            division: "Div B - IT",
-            description: "Silver aluminum case with midnight blue sport loop. Lost near the study cubicles.",
-            image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80",
-            status: "Searching"
-        },
-        {
-            id: 2,
-            type: "found",
-            title: "Black Leather Bifold Wallet",
-            location: "Student Center Cafeteria",
-            date: "Yesterday",
-            category: "ID Cards & Wallets",
-            prnNumber: "1032210412",
-            division: "Div A - Mech",
-            description: "Contains a metro card and student gym pass. Handed over to security desk counter 2.",
-            image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80",
-            status: "In Safekeeping"
-        },
-        {
-            id: 3,
-            type: "lost",
-            title: "Dell XPS 15 Charger & Dongle",
-            location: "Engineering Hall B-104",
-            date: "Oct 30",
-            category: "Laptops & Accessories",
-            prnNumber: "1032210992",
-            division: "Div C - CS",
-            description: "130W USB-C charger with a gray 7-in-1 USB adapter cable.",
-            image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80",
-            status: "Reward Offered"
-        },
-        {
-            id: 4,
-            type: "found",
-            title: "Honda Car Key with Dorm FOB",
-            location: "North Parking Lot",
-            date: "Oct 29",
-            category: "Keys & Badges",
-            prnNumber: "1032210156",
-            division: "Div A - Civil",
-            description: "Black car key fob attached to a red woven lanyard with dorm room key 204.",
-            image: "https://images.unsplash.com/photo-1666346166849-8443c47f50fa?auto=format&fit=crop&w=600&q=80",
-            status: "Awaiting Claim"
-        }
-    ]);
+    const [items, setItems] = useState(INITIAL_ITEMS);
+
+    // Rule 3: Informative Feedback Toast State & Rule 6: Permit Reversal of Actions (Undo)
+    const [feedbackToast, setFeedbackToast] = useState<{ message: string; undoAction?: () => void } | null>(null);
+
+    const showToast = (message: string, undoAction?: () => void) => {
+        setFeedbackToast({ message, undoAction });
+        setTimeout(() => {
+            setFeedbackToast(null);
+        }, 5000);
+    };
 
     const handleOpenReport = (type: "lost" | "found") => {
         setReportType(type);
@@ -100,7 +116,17 @@ export default function LandingContent() {
             image: data.image,
             status: data.type === "lost" ? "Searching" : "Reported & Verifying"
         };
+
         setItems(prev => [newItem, ...prev]);
+
+        // Rule 3: Informative Feedback & Rule 6: Permit Easy Reversal of Actions (Undo newly created item)
+        showToast(
+            `"${newItem.title}" was successfully reported and published.`,
+            () => {
+                setItems(prev => prev.filter(i => i.id !== newItem.id));
+                showToast("Action reversed: Report removed.");
+            }
+        );
     };
 
     const handleViewDetails = (item: any) => {
@@ -109,7 +135,7 @@ export default function LandingContent() {
     };
 
     const handleClaimAction = (item: any) => {
-        alert(`Verification initiated for: "${item.title}". A confirmation token has been logged to the DBMS system for student verification.`);
+        showToast(`Verification initiated for "${item.title}". Token logged to DBMS.`);
         setDetailModalOpen(false);
     };
 
@@ -124,6 +150,33 @@ export default function LandingContent() {
 
     return (
         <div className="relative w-full bg-slate-50 dark:bg-neutral-950 text-neutral-900 dark:text-white font-sans selection:bg-indigo-500/20 transition-colors duration-300">
+            
+            {/* Rule 3: Informative Feedback & Rule 6: Easy Reversal (Floating Toast with Undo) */}
+            {feedbackToast && (
+                <div 
+                    role="status" 
+                    aria-live="polite"
+                    className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[110] flex items-center gap-3 px-4 sm:px-5 py-3 rounded-2xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 shadow-2xl border border-white/10 text-xs sm:text-sm font-medium animate-in slide-in-from-bottom-5 duration-200"
+                >
+                    <div className="h-5 w-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                        <Check className="h-3.5 w-3.5" />
+                    </div>
+                    <span>{feedbackToast.message}</span>
+                    {feedbackToast.undoAction && (
+                        <button
+                            onClick={() => {
+                                feedbackToast.undoAction?.();
+                                setFeedbackToast(null);
+                            }}
+                            className="ml-2 flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/15 dark:bg-neutral-900/15 hover:bg-white/25 text-indigo-300 dark:text-indigo-600 font-semibold text-xs transition-colors cursor-pointer"
+                        >
+                            <Undo2 className="h-3 w-3" />
+                            <span>Undo</span>
+                        </button>
+                    )}
+                </div>
+            )}
+
             {/* HERO CALL-TO-ACTION SECTION */}
             <section id="hero" className="relative py-24 sm:py-32 overflow-hidden border-b border-neutral-200 dark:border-white/5">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.15),transparent)] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.25),transparent)]" />
@@ -135,7 +188,7 @@ export default function LandingContent() {
                     <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-[1.05]">
                         Lost Something? <br className="hidden sm:inline" />
                         <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-sky-500 dark:from-indigo-400 dark:via-sky-300 dark:to-indigo-200 bg-clip-text text-transparent">
-                            Find It In Minutes.
+                            Find It here.
                         </span>
                     </h2>
                     <p className="mt-6 text-base sm:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto font-light leading-relaxed">
@@ -272,6 +325,98 @@ export default function LandingContent() {
                 </div>
             </section>
 
+            {/* BEN SHNEIDERMAN'S 8 GOLDEN RULES SECTION */}
+            <section id="ui-principles" className="py-24 sm:py-32 border-b border-neutral-200 dark:border-white/5 relative">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-widest bg-indigo-500/10 border border-indigo-500/25 text-indigo-600 dark:text-indigo-400 mb-4 font-semibold">
+                            <BookOpen className="h-3.5 w-3.5" />
+                            HCI Standards
+                        </span>
+                        <h3 className="text-3xl sm:text-5xl font-bold tracking-tight">
+                            Eight Golden Rules of UI Design
+                        </h3>
+                        <p className="mt-4 text-sm sm:text-base text-neutral-600 dark:text-neutral-400">
+                            How Ben Shneiderman’s foundational human-computer interaction principles are implemented across this Lost & Found system.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {/* Rule 1 */}
+                        <div className="rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/50 p-6 shadow-sm hover:border-indigo-500/50 transition-all">
+                            <div className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 mb-2">RULE 01</div>
+                            <h4 className="font-bold text-base mb-2">Strive for Consistency</h4>
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                                Unified color palette (Indigo/Emerald/Rose), consistent button shapes, standard typography, and persistent top navigation across all routes.
+                            </p>
+                        </div>
+
+                        {/* Rule 2 */}
+                        <div className="rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/50 p-6 shadow-sm hover:border-indigo-500/50 transition-all">
+                            <div className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 mb-2">RULE 02</div>
+                            <h4 className="font-bold text-base mb-2">Seek Universal Usability</h4>
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                                Dual-theme toggle (Light/Dark mode), accessible contrasts, mobile touch support, keyboard navigability, and clear roles for students & teachers.
+                            </p>
+                        </div>
+
+                        {/* Rule 3 */}
+                        <div className="rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/50 p-6 shadow-sm hover:border-indigo-500/50 transition-all">
+                            <div className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 mb-2">RULE 03</div>
+                            <h4 className="font-bold text-base mb-2">Offer Informative Feedback</h4>
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                                Live feedback toasts upon reporting, instant visual indicators for loading and filtering, and success messages after report registration.
+                            </p>
+                        </div>
+
+                        {/* Rule 4 */}
+                        <div className="rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/50 p-6 shadow-sm hover:border-indigo-500/50 transition-all">
+                            <div className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 mb-2">RULE 04</div>
+                            <h4 className="font-bold text-base mb-2">Design Dialogues for Closure</h4>
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                                Multi-step modal dialogues with explicit completion screens (&quot;Report Successfully Submitted&quot;), confirming the task has concluded.
+                            </p>
+                        </div>
+
+                        {/* Rule 5 */}
+                        <div className="rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/50 p-6 shadow-sm hover:border-indigo-500/50 transition-all">
+                            <div className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 mb-2">RULE 05</div>
+                            <h4 className="font-bold text-base mb-2">Prevent Errors</h4>
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                                Strict PRN digit validation, required field checks, 5MB file-size limits, and warning labels before invalid data is accepted into the database.
+                            </p>
+                        </div>
+
+                        {/* Rule 6 */}
+                        <div className="rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/50 p-6 shadow-sm hover:border-indigo-500/50 transition-all">
+                            <div className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 mb-2">RULE 06</div>
+                            <h4 className="font-bold text-base mb-2">Easy Reversal of Actions</h4>
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                                Built-in &quot;Reset Form&quot; button inside the report modal and floating &quot;Undo&quot; action toast to instantly revert accidental item submissions.
+                            </p>
+                        </div>
+
+                        {/* Rule 7 */}
+                        <div className="rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/50 p-6 shadow-sm hover:border-indigo-500/50 transition-all">
+                            <div className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 mb-2">RULE 07</div>
+                            <h4 className="font-bold text-base mb-2">Keep Users in Control</h4>
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                                Users can cancel submissions anytime, close modals via backdrop click or escape, toggle view modes, and log out on demand.
+                            </p>
+                        </div>
+
+                        {/* Rule 8 */}
+                        <div className="rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/50 p-6 shadow-sm hover:border-indigo-500/50 transition-all">
+                            <div className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 mb-2">RULE 08</div>
+                            <h4 className="font-bold text-base mb-2">Reduce Memory Load</h4>
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                                Autocomplete dropdowns for campus locations and divisions, categorized filter tabs, and thumbnail previews eliminate the need to memorize details.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* RECENT LOST & FOUND SECTION */}
             <section id="recent" className="py-24 sm:py-32 border-b border-neutral-200 dark:border-white/5 relative">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -286,7 +431,7 @@ export default function LandingContent() {
                         </div>
 
                         <div className="flex flex-wrap items-center gap-3">
-                            {/* Search Input */}
+                            {/* Rule 8: Reduce Memory Load - Search Input */}
                             <div className="relative">
                                 <Search className="absolute left-3.5 top-2.5 h-4 w-4 text-neutral-400" />
                                 <input
@@ -298,7 +443,7 @@ export default function LandingContent() {
                                 />
                             </div>
 
-                            {/* Filter Tabs */}
+                            {/* Rule 8: Reduce Memory Load - Filter Tabs */}
                             <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-white/10">
                                 <button
                                     onClick={() => setActiveFilter("all")}

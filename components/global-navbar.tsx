@@ -67,6 +67,7 @@ export default function GlobalNavbar() {
                     <a href="#hero" className="hover:text-indigo-600 dark:hover:text-white transition-colors">Home</a>
                     <a href="#how-it-works" className="hover:text-indigo-600 dark:hover:text-white transition-colors">How It Works</a>
                     <a href="#features" className="hover:text-indigo-600 dark:hover:text-white transition-colors">Features</a>
+                    <a href="#ui-principles" className="hover:text-indigo-600 dark:hover:text-white transition-colors">UI Rules</a>
                     <a href="#recent" className="hover:text-indigo-600 dark:hover:text-white transition-colors">Recent Items</a>
                     <a href="#about" className="hover:text-indigo-600 dark:hover:text-white transition-colors">About</a>
                 </nav>
