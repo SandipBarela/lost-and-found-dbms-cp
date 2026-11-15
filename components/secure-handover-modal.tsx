@@ -235,38 +235,38 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
 
   return (
     <div 
-      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 editorial-modal-backdrop animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div 
-        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-2xl p-6 sm:p-8 text-neutral-900 dark:text-white"
+        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto editorial-modal-container p-6 sm:p-8 text-[#1F2421]"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-6 right-6 p-2 rounded-xl text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-white/5 transition-all cursor-pointer"
+          className="btn-tactile-secondary absolute top-6 right-6 p-2 text-xs"
         >
-          <X className="h-5 w-5" />
+          <X className="h-4 w-4" />
         </button>
 
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 font-semibold">
+            <span className="badge-campus inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider font-semibold">
               <ShieldCheck className="h-3.5 w-3.5" />
               Secure Handover – Simple Workflow
             </span>
-            <span className="text-xs text-neutral-400 font-mono hidden sm:inline">5-Stage Exchange Protocol</span>
+            <span className="text-xs text-[#5A625E] font-mono hidden sm:inline">5-Stage Exchange Protocol</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Handover & Return Terminal</h2>
-          <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-            Follow the 5-step verified process: Admin approval $\rightarrow$ Schedule handover $\rightarrow$ Physical meeting $\rightarrow$ Confirm handover $\rightarrow$ Item status marked <strong>Returned</strong>.
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-[#1F2421]">Handover & Return Terminal</h2>
+          <p className="text-xs sm:text-sm text-[#5A625E] mt-1 font-sans">
+            Follow the 5-step verified process: Admin approval → Schedule handover → Physical meeting → Confirm handover → Item status marked <strong>Returned</strong>.
           </p>
         </div>
 
         {/* 5-Step Visual Workflow Progress Bar */}
-        <div className="mb-6 p-3.5 sm:p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-white/10 overflow-x-auto">
+        <div className="mb-6 p-3.5 sm:p-4 rounded-xl bg-white border border-[#CFC5B4] shadow-tactile-card overflow-x-auto">
           <div className="flex items-center justify-between min-w-[580px] gap-2">
             {steps.map((st) => {
               const isPast = currentStep > st.num;
@@ -275,19 +275,19 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
                 <div key={st.num} className="flex-1 flex flex-col items-center text-center relative">
                   <div className={`h-8 w-8 rounded-full flex items-center justify-center font-mono font-bold text-xs mb-1.5 transition-all ${
                     isPast
-                      ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/30"
+                      ? "bg-[#2D5A4C] text-white shadow-sm"
                       : isCurrent
-                      ? "bg-indigo-600 text-white ring-4 ring-indigo-500/20 shadow-md shadow-indigo-600/30 scale-105"
-                      : "bg-neutral-200 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-400"
+                      ? "bg-[#D95D39] text-white shadow-tactile-btn scale-105"
+                      : "bg-[#F2ECE1] text-[#5A625E] border border-[#E3DCD0]"
                   }`}>
                     {isPast ? <Check className="h-4 w-4" /> : st.num}
                   </div>
                   <span className={`text-[11px] font-semibold block leading-tight ${
-                    isCurrent ? "text-indigo-600 dark:text-indigo-400" : isPast ? "text-emerald-600 dark:text-emerald-400" : "text-neutral-500"
+                    isCurrent ? "text-[#D95D39]" : isPast ? "text-[#2D5A4C]" : "text-[#5A625E]"
                   }`}>
                     {st.title}
                   </span>
-                  <span className="text-[10px] text-neutral-400 font-light mt-0.5">
+                  <span className="text-[10px] text-[#5A625E] font-mono mt-0.5">
                     {st.desc}
                   </span>
                 </div>
@@ -297,24 +297,24 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
         </div>
 
         {/* Token Search Bar */}
-        <div className="p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/40 border border-neutral-200 dark:border-white/10 mb-6">
-          <label className="block text-xs font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2 font-semibold">
+        <div className="p-4 rounded-xl bg-white border border-[#CFC5B4] shadow-tactile-card mb-6">
+          <label className="block text-xs font-mono uppercase tracking-wider text-[#1F2421] mb-2 font-semibold">
             Input or Scan Student Retrieval Pass Token
           </label>
           <div className="flex gap-2">
             <div className="relative flex-1">
-              <Key className="absolute left-3.5 top-3 h-4 w-4 text-neutral-400" />
+              <Key className="absolute left-3.5 top-3 h-4 w-4 text-[#5A625E]" />
               <input
                 type="text"
                 placeholder="e.g. RET-482910-0084"
                 value={tokenInput}
                 onChange={(e) => setTokenInput(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-neutral-300 dark:border-white/10 bg-white dark:bg-neutral-900 font-mono text-sm uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+                className="editorial-input pl-10 pr-4 font-mono text-sm uppercase tracking-wider"
               />
             </div>
             <button
               onClick={() => handleLookup(tokenInput)}
-              className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-md shadow-emerald-600/20"
+              className="btn-tactile-primary text-xs py-2.5 px-5 flex items-center gap-1.5"
             >
               <Search className="h-4 w-4" />
               Lookup Token
@@ -322,7 +322,7 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
           </div>
 
           {/* Quick preset suggestions */}
-          <div className="mt-2.5 flex items-center gap-2 text-[11px] text-neutral-500">
+          <div className="mt-2.5 flex items-center gap-2 text-[11px] text-[#5A625E]">
             <span>Quick test tokens:</span>
             {SAMPLE_TOKENS.map(t => (
               <button
@@ -331,7 +331,7 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
                   setTokenInput(t.token);
                   handleLookup(t.token);
                 }}
-                className="font-mono text-indigo-500 hover:underline cursor-pointer"
+                className="font-mono text-[#D95D39] hover:underline cursor-pointer"
               >
                 {t.token}
               </button>
@@ -340,7 +340,7 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
         </div>
 
         {errorMessage && (
-          <div className="p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs flex items-center gap-2 mb-6">
+          <div className="p-4 rounded-xl badge-alert text-xs flex items-center gap-2 mb-6 border">
             <AlertCircle className="h-4 w-4 shrink-0" />
             <span>{errorMessage}</span>
           </div>
@@ -350,19 +350,17 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
         {activeRecord && (
           <div className="space-y-6 animate-in fade-in duration-200">
             {/* Record Overview Card */}
-            <div className="p-5 rounded-2xl border border-neutral-200 dark:border-white/10 bg-neutral-50/50 dark:bg-neutral-800/30 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-200 dark:border-white/10 pb-3">
+            <div className="p-5 rounded-xl border border-[#CFC5B4] bg-white shadow-tactile-card space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E3DCD0] pb-3">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">Handover Pass Token</span>
-                  <p className="text-xl font-mono font-extrabold text-indigo-600 dark:text-indigo-400">{activeRecord.token}</p>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#5A625E]">Handover Pass Token</span>
+                  <p className="font-serif text-xl font-mono font-extrabold text-[#D95D39]">{activeRecord.token}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold ${
                     currentStep === 5 || activeRecord.status === "Returned"
-                      ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30"
-                      : currentStep === 3
-                      ? "bg-sky-500/15 text-sky-600 dark:text-sky-400 border border-sky-500/30"
-                      : "bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30"
+                      ? "badge-verified"
+                      : "badge-campus"
                   }`}>
                     {currentStep === 5 || activeRecord.status === "Returned" ? "Returned ✓" : activeRecord.status}
                   </span>
@@ -372,40 +370,40 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
               {/* Item and Parties Overview */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                 {/* Item Details */}
-                <div className="flex gap-3 p-3 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-white/10">
+                <div className="flex gap-3 p-3 rounded-lg bg-[#FAF7F2] border border-[#E3DCD0]">
                   {activeRecord.image && (
                     <img 
                       src={activeRecord.image} 
                       alt={activeRecord.itemTitle} 
-                      className="h-16 w-16 rounded-xl object-cover shrink-0" 
+                      className="h-16 w-16 rounded-lg object-cover shrink-0 border border-[#E3DCD0]" 
                     />
                   )}
                   <div>
-                    <span className="text-neutral-400 block text-[10px] uppercase font-mono">Item in Custody</span>
-                    <h4 className="font-semibold text-sm text-neutral-900 dark:text-white">{activeRecord.itemTitle}</h4>
-                    <p className="text-neutral-500 font-mono text-[11px]">{activeRecord.category}</p>
-                    <p className="text-[10px] text-neutral-400 mt-1">Proof: &quot;{activeRecord.proofDetail}&quot;</p>
+                    <span className="text-[#5A625E] block text-[10px] uppercase font-mono">Item in Custody</span>
+                    <h4 className="font-semibold text-sm text-[#1F2421]">{activeRecord.itemTitle}</h4>
+                    <p className="text-[#5A625E] font-mono text-[11px]">{activeRecord.category}</p>
+                    <p className="text-[10px] text-[#5A625E] mt-1">Proof: &quot;{activeRecord.proofDetail}&quot;</p>
                   </div>
                 </div>
 
                 {/* Parties Details: Student & Finder */}
-                <div className="p-3 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-white/10 space-y-2">
+                <div className="p-3 rounded-lg bg-[#FAF7F2] border border-[#E3DCD0] space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-neutral-400 block text-[10px] uppercase font-mono">Exchange Parties</span>
-                    <span className="text-[10px] font-mono text-emerald-500 font-semibold flex items-center gap-1">
+                    <span className="text-[#5A625E] block text-[10px] uppercase font-mono">Exchange Parties</span>
+                    <span className="badge-verified text-[10px] font-mono font-semibold flex items-center gap-1 px-2 py-0.5 rounded-full">
                       <Users className="h-3 w-3" /> Counter 2
                     </span>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-[11px]">
                     <div>
-                      <span className="text-neutral-400 block text-[10px]">Claimant (Student):</span>
-                      <p className="font-bold text-neutral-900 dark:text-white truncate">{activeRecord.claimantName}</p>
-                      <p className="font-mono text-neutral-500 text-[10px]">PRN: {activeRecord.claimantPrn}</p>
+                      <span className="text-[#5A625E] block text-[10px]">Claimant (Student):</span>
+                      <p className="font-bold text-[#1F2421] truncate">{activeRecord.claimantName}</p>
+                      <p className="font-mono text-[#5A625E] text-[10px]">PRN: {activeRecord.claimantPrn}</p>
                     </div>
                     <div>
-                      <span className="text-neutral-400 block text-[10px]">Finder / Custodian:</span>
-                      <p className="font-bold text-neutral-900 dark:text-white truncate">{activeRecord.finderName || "Campus Custody Officer"}</p>
-                      <p className="text-neutral-500 text-[10px]">Central Security Desk</p>
+                      <span className="text-[#5A625E] block text-[10px]">Finder / Custodian:</span>
+                      <p className="font-bold text-[#1F2421] truncate">{activeRecord.finderName || "Campus Custody Officer"}</p>
+                      <p className="text-[#5A625E] text-[10px]">Central Security Desk</p>
                     </div>
                   </div>
                 </div>
@@ -413,32 +411,28 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
             </div>
 
             {/* STEP 1: ADMIN APPROVES CLAIM */}
-            <div className={`p-5 rounded-2xl border transition-all ${
-              currentStep === 1 
-                ? "border-amber-500/40 bg-amber-50/30 dark:bg-amber-950/20" 
-                : "border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900"
-            }`}>
+            <div className={`p-5 rounded-xl border border-[#CFC5B4] bg-white shadow-tactile-card transition-all`}>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <div className={`h-7 w-7 rounded-lg flex items-center justify-center font-mono font-bold text-xs ${
-                    currentStep > 1 ? "bg-emerald-500 text-white" : "bg-indigo-600 text-white"
+                    currentStep > 1 ? "bg-[#2D5A4C] text-white" : "bg-[#D95D39] text-white"
                   }`}>
                     {currentStep > 1 ? <Check className="h-4 w-4" /> : "1"}
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm">Step 1: Admin Approves the Claim</h4>
-                    <p className="text-xs text-neutral-500">Admin reviews ownership statement & student PRN verification.</p>
+                    <h4 className="font-bold text-sm text-[#1F2421]">Step 1: Admin Approves the Claim</h4>
+                    <p className="text-xs text-[#5A625E]">Admin reviews ownership statement & student PRN verification.</p>
                   </div>
                 </div>
 
                 {currentStep > 1 ? (
-                  <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+                  <span className="badge-verified text-xs font-mono font-semibold flex items-center gap-1 px-3 py-1 rounded-full border">
                     <CheckCircle2 className="h-3.5 w-3.5" /> Claim Approved
                   </span>
                 ) : (
                   <button
                     onClick={handleApproveClaim}
-                    className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-md shadow-indigo-600/20 transition-all cursor-pointer"
+                    className="btn-tactile-primary text-xs py-2 px-4"
                   >
                     Approve Claim
                   </button>
@@ -448,33 +442,29 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
 
             {/* STEP 2: A SCHEDULE HANDOVER BUTTON APPEARS */}
             {currentStep >= 2 && (
-              <div className={`p-5 rounded-2xl border transition-all animate-in fade-in duration-200 ${
-                currentStep === 2 
-                  ? "border-indigo-500/40 bg-indigo-50/30 dark:bg-indigo-950/20" 
-                  : "border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900"
-              }`}>
+              <div className="p-5 rounded-xl border border-[#CFC5B4] bg-white shadow-tactile-card transition-all animate-in fade-in duration-200">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-2.5">
                     <div className={`h-7 w-7 rounded-lg flex items-center justify-center font-mono font-bold text-xs ${
-                      currentStep > 2 ? "bg-emerald-500 text-white" : "bg-indigo-600 text-white"
+                      currentStep > 2 ? "bg-[#2D5A4C] text-white" : "bg-[#D95D39] text-white"
                     }`}>
                       {currentStep > 2 ? <Check className="h-4 w-4" /> : "2"}
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm">Step 2: Schedule Handover</h4>
-                      <p className="text-xs text-neutral-500">Schedule exchange desk and notification for student & finder.</p>
+                      <h4 className="font-bold text-sm text-[#1F2421]">Step 2: Schedule Handover</h4>
+                      <p className="text-xs text-[#5A625E]">Schedule exchange desk and notification for student & finder.</p>
                     </div>
                   </div>
 
                   {currentStep > 2 ? (
-                    <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+                    <span className="badge-verified text-xs font-mono font-semibold flex items-center gap-1 px-3 py-1 rounded-full border">
                       <CheckCircle2 className="h-3.5 w-3.5" /> Handover Scheduled
                     </span>
                   ) : (
                     <button
                       onClick={handleScheduleHandover}
                       disabled={isProcessing}
-                      className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-lg shadow-indigo-600/25 transition-all cursor-pointer flex items-center gap-1.5"
+                      className="btn-tactile-primary text-xs py-2.5 px-5 flex items-center gap-1.5"
                     >
                       <Calendar className="h-4 w-4" />
                       <span>{isProcessing ? "Scheduling..." : "Schedule Handover"}</span>
@@ -486,45 +476,41 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
 
             {/* STEP 3: STUDENT & FINDER MEET PHYSICALLY TO EXCHANGE THE ITEM */}
             {currentStep >= 3 && (
-              <div className={`p-5 rounded-2xl border transition-all animate-in fade-in duration-200 ${
-                currentStep === 3 
-                  ? "border-sky-500/40 bg-sky-50/30 dark:bg-sky-950/20" 
-                  : "border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900"
-              }`}>
+              <div className="p-5 rounded-xl border border-[#CFC5B4] bg-white shadow-tactile-card transition-all animate-in fade-in duration-200">
                 <div className="flex items-start gap-2.5 mb-3">
                   <div className={`h-7 w-7 rounded-lg flex items-center justify-center font-mono font-bold text-xs mt-0.5 ${
-                    currentStep > 3 ? "bg-emerald-500 text-white" : "bg-sky-600 text-white"
+                    currentStep > 3 ? "bg-[#2D5A4C] text-white" : "bg-[#D95D39] text-white"
                   }`}>
                     {currentStep > 3 ? <Check className="h-4 w-4" /> : "3"}
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm">Step 3: Student & Finder Meet Physically to Exchange the Item</h4>
-                    <p className="text-xs text-neutral-500">
+                    <h4 className="font-bold text-sm text-[#1F2421]">Step 3: Student & Finder Meet Physically to Exchange the Item</h4>
+                    <p className="text-xs text-[#5A625E]">
                       Both parties meet in person at <strong>Central Security Desk Counter 2</strong> for physical inspection and item handover.
                     </p>
                   </div>
                 </div>
 
                 {currentStep < 5 && (
-                  <div className="mt-3 p-3.5 rounded-xl bg-white dark:bg-neutral-800/80 border border-neutral-200 dark:border-white/10 space-y-2 text-xs">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block font-semibold">
+                  <div className="mt-3 p-3.5 rounded-lg bg-[#FAF7F2] border border-[#E3DCD0] space-y-2 text-xs">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#5A625E] block font-semibold">
                       In-Person Verification Checklist:
                     </span>
-                    <label className="flex items-center gap-2.5 text-neutral-800 dark:text-neutral-200 cursor-pointer">
+                    <label className="flex items-center gap-2.5 text-[#1F2421] cursor-pointer">
                       <input 
                         type="checkbox" 
                         checked={checkIdVerified} 
                         onChange={(e) => setCheckIdVerified(e.target.checked)}
-                        className="rounded accent-emerald-600 h-4 w-4 cursor-pointer" 
+                        className="rounded accent-[#D95D39] h-4 w-4 cursor-pointer" 
                       />
                       <span>Physical College ID verified for {activeRecord.claimantName} (PRN: {activeRecord.claimantPrn})</span>
                     </label>
-                    <label className="flex items-center gap-2.5 text-neutral-800 dark:text-neutral-200 cursor-pointer">
+                    <label className="flex items-center gap-2.5 text-[#1F2421] cursor-pointer">
                       <input 
                         type="checkbox" 
                         checked={checkItemInspected} 
                         onChange={(e) => setCheckItemInspected(e.target.checked)}
-                        className="rounded accent-emerald-600 h-4 w-4 cursor-pointer" 
+                        className="rounded accent-[#D95D39] h-4 w-4 cursor-pointer" 
                       />
                       <span>Student and finder met in person; item physical condition inspected and accepted</span>
                     </label>
@@ -535,22 +521,22 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
 
             {/* STEP 4: ADMIN CLICKS CONFIRM HANDOVER */}
             {currentStep >= 3 && currentStep < 5 && (
-              <div className="p-5 rounded-2xl border border-emerald-500/30 bg-emerald-50/20 dark:bg-emerald-950/20 animate-in fade-in duration-200">
+              <div className="p-5 rounded-xl border border-[#CFC5B4] bg-white shadow-tactile-card animate-in fade-in duration-200">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-2.5">
-                    <div className="h-7 w-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-mono font-bold text-xs">
+                    <div className="h-7 w-7 rounded-lg bg-[#D95D39] text-white flex items-center justify-center font-mono font-bold text-xs">
                       4
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm">Step 4: Admin Clicks Confirm Handover</h4>
-                      <p className="text-xs text-neutral-500">Sign off on the exchange after student & finder physical meetup.</p>
+                      <h4 className="font-bold text-sm text-[#1F2421]">Step 4: Admin Clicks Confirm Handover</h4>
+                      <p className="text-xs text-[#5A625E]">Sign off on the exchange after student & finder physical meetup.</p>
                     </div>
                   </div>
 
                   <button
                     onClick={handleConfirmHandover}
                     disabled={isProcessing || !checkIdVerified || !checkItemInspected}
-                    className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-semibold shadow-lg shadow-emerald-600/30 transition-all cursor-pointer flex items-center justify-center gap-2 shrink-0"
+                    className="btn-tactile-primary py-3 px-6 text-xs flex items-center justify-center gap-2 shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     <Stamp className="h-4 w-4" />
                     <span>{isProcessing ? "Confirming Handover..." : "Confirm Handover"}</span>
@@ -561,26 +547,26 @@ export default function SecureHandoverModal({ isOpen, onClose, initialToken, onH
 
             {/* STEP 5: THE SYSTEM CHANGES THE ITEM STATUS TO RETURNED */}
             {currentStep === 5 && (
-              <div className="p-6 rounded-2xl border-2 border-emerald-500/40 bg-emerald-500/10 text-emerald-900 dark:text-emerald-100 text-center space-y-3 animate-in zoom-in-95 duration-200">
-                <div className="h-14 w-14 mx-auto rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center">
+              <div className="p-6 rounded-xl border border-[#BFD9CE] bg-[#E1EFE9] text-[#225444] text-center space-y-3 shadow-tactile-card animate-in zoom-in-95 duration-200">
+                <div className="h-14 w-14 mx-auto rounded-full bg-[#2D5A4C]/15 text-[#2D5A4C] flex items-center justify-center">
                   <PackageCheck className="h-8 w-8" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-bold block">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[#2D5A4C] font-bold block">
                     Step 5 Complete
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-emerald-700 dark:text-emerald-300">
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#225444]">
                     Item Status Changed to: Returned
                   </h3>
-                  <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 max-w-md mx-auto mt-1">
-                    The physical exchange between student <strong className="text-neutral-900 dark:text-white">{activeRecord.claimantName}</strong> and finder is complete. All DBMS records and live item feeds now mark this item as <strong>Returned</strong>.
+                  <p className="text-xs sm:text-sm text-[#225444]/90 max-w-md mx-auto mt-1 font-sans">
+                    The physical exchange between student <strong className="text-[#1F2421]">{activeRecord.claimantName}</strong> and finder is complete. All DBMS records and live item feeds now mark this item as <strong>Returned</strong>.
                   </p>
                 </div>
 
                 <div className="pt-2 flex items-center justify-center gap-3">
                   <button
                     onClick={onClose}
-                    className="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
+                    className="btn-tactile-primary text-xs py-2.5 px-6"
                   >
                     Done & Close Terminal
                   </button>

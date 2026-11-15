@@ -32,7 +32,14 @@ export async function GET() {
           'lost' as type,
           l.title,
           l.category,
-          COALESCE(loc.building_name, 'Campus') as location,
+          COALESCE(
+            CONCAT(
+              loc.building_name, 
+              IF(loc.floor_room IS NOT NULL AND loc.floor_room != '' AND loc.floor_room != 'General Area', CONCAT(' (', loc.floor_room, ')'), '')
+            ),
+            loc.building_name, 
+            'Campus'
+          ) as location,
           DATE_FORMAT(l.date_lost, '%b %d') as date,
           COALESCE(u.prn_number, '1032210084') as prnNumber,
           l.status,
@@ -50,7 +57,14 @@ export async function GET() {
           'found' as type,
           f.title,
           f.category,
-          COALESCE(loc.building_name, 'Campus') as location,
+          COALESCE(
+            CONCAT(
+              loc.building_name, 
+              IF(loc.floor_room IS NOT NULL AND loc.floor_room != '' AND loc.floor_room != 'General Area', CONCAT(' (', loc.floor_room, ')'), '')
+            ),
+            loc.building_name, 
+            'Campus'
+          ) as location,
           DATE_FORMAT(f.date_found, '%b %d') as date,
           COALESCE(u.prn_number, '1032210412') as prnNumber,
           f.status,

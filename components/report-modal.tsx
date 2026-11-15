@@ -24,11 +24,20 @@ export interface ItemFormData {
   itemTitle: string;
   category: string;
   location: string;
+  locationId?: number | null;
   dateTime: string;
   description: string;
   contactEmail: string;
   contactPhone: string;
   image: string;
+}
+
+interface CampusLocation {
+  location_id: number;
+  building_name: string;
+  floor_room: string;
+  campus_zone: string;
+  full_display_name?: string;
 }
 
 interface ReportModalProps {
@@ -52,6 +61,8 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
   const [previewImage, setPreviewImage] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [campusLocations, setCampusLocations] = useState<CampusLocation[]>([]);
+  const [selectedLocationId, setSelectedLocationId] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Auto-populated credentials from authenticated user profile / database
@@ -68,6 +79,20 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
     email: "student@college.edu",
     rollNumber: "TY-CS-42"
   });
+
+  // Fetch campus locations from MySQL location master table
+  useEffect(() => {
+    if (isOpen) {
+      fetch("/api/locations")
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && Array.isArray(data.locations)) {
+            setCampusLocations(data.locations);
+          }
+        })
+        .catch(() => {});
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     try {
@@ -124,7 +149,22 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
   const handleReset = () => {
     setFormData(INITIAL_FORM_STATE);
     setPreviewImage("");
+    setSelectedLocationId(null);
     setErrors({});
+  };
+
+  const handleLocationChange = (val: string) => {
+    setFormData(prev => ({ ...prev, location: val }));
+    if (errors.location) setErrors(prev => ({ ...prev, location: "" }));
+
+    const trimmed = val.trim();
+    const matched = campusLocations.find(loc => 
+      loc.full_display_name === trimmed || 
+      `${loc.building_name} - ${loc.floor_room} (${loc.campus_zone})` === trimmed ||
+      `${loc.building_name} - ${loc.floor_room}` === trimmed ||
+      loc.building_name.toLowerCase() === trimmed.toLowerCase()
+    );
+    setSelectedLocationId(matched ? matched.location_id : null);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -153,6 +193,7 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
       itemTitle: formData.itemTitle,
       category: formData.category,
       location: formData.location,
+      locationId: selectedLocationId,
       dateTime: formData.dateTime,
       description: formData.description,
       image: finalImage,
@@ -171,31 +212,31 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
 
   return (
     <div 
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 editorial-modal-backdrop animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div 
-        className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-2xl p-6 sm:p-8 text-neutral-900 dark:text-white"
+        className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto editorial-modal-container p-6 sm:p-8 text-[#1F2421]"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
           aria-label="Close dialog"
-          className="absolute top-6 right-6 p-2 rounded-xl text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-white/5 transition-all cursor-pointer"
+          className="absolute top-6 right-6 p-2 rounded-xl text-[#5A625E] hover:text-[#1F2421] hover:bg-[#F2ECE1] transition-all cursor-pointer"
         >
           <X className="h-5 w-5" />
         </button>
 
         {isSuccess ? (
           <div className="py-16 text-center flex flex-col items-center justify-center animate-in zoom-in-95 duration-200">
-            <div className="h-16 w-16 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center mb-4">
+            <div className="h-16 w-16 rounded-full bg-[#E1EFE9] text-[#225444] border border-[#BFD9CE] flex items-center justify-center mb-4">
               <CheckCircle className="h-10 w-10" />
             </div>
-            <h3 className="text-2xl font-bold mb-2">Report Successfully Submitted!</h3>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-md">
+            <h3 className="font-serif text-2xl font-bold mb-2 text-[#1F2421]">Report Successfully Submitted!</h3>
+            <p className="text-sm text-[#5A625E] max-w-md">
               Your {type} item has been recorded in the database under your authenticated credentials.
             </p>
-            <span className="mt-4 text-xs font-mono text-emerald-600 dark:text-emerald-400">
+            <span className="mt-4 text-xs font-mono text-[#225444]">
               Closing dialogue...
             </span>
           </div>
@@ -203,39 +244,39 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
           <>
             <div className="mb-5">
               <span className={`inline-block px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider font-semibold mb-2 ${
-                isLost ? "bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20" : "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+                isLost ? "badge-alert" : "badge-verified"
               }`}>
                 {isLost ? "Missing Property Report" : "Found Property Claim Registry"}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-[-0.025em] text-[#1F2421]">
                 {isLost ? "Report a Lost Item" : "Report a Found Item"}
               </h2>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+              <p className="text-xs text-[#5A625E] mt-1 font-sans">
                 Enter only the item details, location, and photo. Your credentials are automatically linked from your login.
               </p>
             </div>
 
             {/* Authenticated User Auto-Link Card */}
-            <div className="mb-6 p-3.5 rounded-2xl bg-neutral-100/80 dark:bg-neutral-800/60 border border-neutral-200 dark:border-white/10 flex items-center justify-between">
+            <div className="mb-6 p-3.5 rounded-xl bg-white border border-[#E3DCD0] shadow-tactile-card flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold font-mono text-sm shadow-sm">
+                <div className="h-9 w-9 rounded-xl bg-[#2D5A4C] text-[#E1EFE9] flex items-center justify-center font-bold font-mono text-sm shadow-xs">
                   {currentUser.displayName ? currentUser.displayName[0].toUpperCase() : "U"}
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <span className="font-semibold text-xs text-neutral-900 dark:text-white">
+                    <span className="font-semibold text-xs text-[#1F2421]">
                       {currentUser.displayName || "Logged In User"}
                     </span>
-                    <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-500/15 border border-emerald-500/25 px-1.5 py-0.2 rounded-md font-bold">
+                    <span className="text-[10px] font-mono badge-verified px-2 py-0.5 font-bold">
                       Linked
                     </span>
                   </div>
-                  <p className="text-[11px] text-neutral-500 font-mono">
+                  <p className="text-[11px] text-[#5A625E] font-mono">
                     PRN: {currentUser.prnNumber || "1032210084"} • {currentUser.department || "Campus Division"}
                   </p>
                 </div>
               </div>
-              <span className="text-[10px] font-mono text-neutral-400 hidden sm:inline">
+              <span className="text-[10px] font-mono text-[#5A625E] hidden sm:inline">
                 Auto-filled from DB
               </span>
             </div>
@@ -243,15 +284,15 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* SECTION 1: ITEM INFORMATION & LOCATION */}
               <div className="space-y-4">
-                <div className="border-b border-neutral-200 dark:border-white/10 pb-1 flex items-center justify-between">
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-semibold">
+                <div className="border-b border-[#E3DCD0] pb-1 flex items-center justify-between">
+                  <h4 className="text-xs font-mono uppercase tracking-wider text-[#D95D39] font-bold">
                     1. Item Information & Location
                   </h4>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-medium mb-1.5 text-neutral-700 dark:text-neutral-300">
+                    <label className="block text-xs font-semibold mb-1.5 text-[#1F2421]">
                       Item Name / Title *
                     </label>
                     <input
@@ -263,25 +304,25 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
                         setFormData({ ...formData, itemTitle: e.target.value });
                         if (errors.itemTitle) setErrors(prev => ({ ...prev, itemTitle: "" }));
                       }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border ${
-                        errors.itemTitle ? "border-rose-500 ring-1 ring-rose-500" : "border-neutral-200 dark:border-white/10"
-                      } bg-neutral-50 dark:bg-neutral-800/60 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50`}
+                      className={`w-full px-3.5 py-2.5 editorial-input text-sm ${
+                        errors.itemTitle ? "border-[#A83C1D] ring-1 ring-[#A83C1D]" : ""
+                      }`}
                     />
                     {errors.itemTitle && (
-                      <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1">
+                      <p className="text-[11px] text-[#A83C1D] mt-1 flex items-center gap-1">
                         <AlertTriangle className="h-3 w-3" /> {errors.itemTitle}
                       </p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium mb-1.5 text-neutral-700 dark:text-neutral-300">
+                    <label className="block text-xs font-semibold mb-1.5 text-[#1F2421]">
                       Category *
                     </label>
                     <select
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-neutral-800/60 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                      className="w-full px-3.5 py-2.5 editorial-input text-sm cursor-pointer"
                     >
                       <option value="Electronics">Electronics</option>
                       <option value="Laptops & Accessories">Laptops & Accessories</option>
@@ -300,43 +341,37 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-medium mb-1.5 text-neutral-700 dark:text-neutral-300">
+                    <label className="block text-xs font-semibold mb-1.5 text-[#1F2421]">
                       {isLost ? "Last Seen Location *" : "Found Location *"}
                     </label>
                     <input
                       type="text"
                       required
                       list="location-options"
-                      placeholder="e.g. Central Library 2nd Floor, Room 1001"
+                      placeholder="e.g. Library - Floor 2, Room 101 or type custom room"
                       value={formData.location}
-                      onChange={(e) => {
-                        setFormData({ ...formData, location: e.target.value });
-                        if (errors.location) setErrors(prev => ({ ...prev, location: "" }));
-                      }}
-                      className={`w-full px-3.5 py-2.5 rounded-xl border ${
-                        errors.location ? "border-rose-500 ring-1 ring-rose-500" : "border-neutral-200 dark:border-white/10"
-                      } bg-neutral-50 dark:bg-neutral-800/60 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50`}
+                      onChange={(e) => handleLocationChange(e.target.value)}
+                      className={`w-full px-3.5 py-2.5 editorial-input text-sm ${
+                        errors.location ? "border-[#A83C1D] ring-1 ring-[#A83C1D]" : ""
+                      }`}
                     />
                     <datalist id="location-options">
-                      <option value="Central Library (2nd Floor)" />
-                      <option value="Student Center Cafeteria" />
-                      <option value="Engineering Hall B-104" />
-                      <option value="Room 1001" />
-                      <option value="North Parking Lot" />
-                      <option value="Sports Complex / Ground" />
-                      <option value="Main Auditorium" />
-                      <option value="Science Block C Ground" />
-                      <option value="Computer Center Lab 3" />
+                      {campusLocations.map((loc) => (
+                        <option 
+                          key={loc.location_id} 
+                          value={loc.full_display_name || `${loc.building_name} - ${loc.floor_room} (${loc.campus_zone})`} 
+                        />
+                      ))}
                     </datalist>
                     {errors.location && (
-                      <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1">
+                      <p className="text-[11px] text-[#A83C1D] mt-1 flex items-center gap-1">
                         <AlertTriangle className="h-3 w-3" /> {errors.location}
                       </p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium mb-1.5 text-neutral-700 dark:text-neutral-300">
+                    <label className="block text-xs font-semibold mb-1.5 text-[#1F2421]">
                       Date & Time *
                     </label>
                     <input
@@ -344,13 +379,13 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
                       required
                       value={formData.dateTime}
                       onChange={(e) => setFormData({ ...formData, dateTime: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-neutral-800/60 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                      className="w-full px-3.5 py-2.5 editorial-input text-sm"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium mb-1.5 text-neutral-700 dark:text-neutral-300">
+                  <label className="block text-xs font-semibold mb-1.5 text-[#1F2421]">
                     Distinguishing Marks & Description
                   </label>
                   <textarea
@@ -358,14 +393,14 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
                     placeholder="Color, brand, unique scratches, stickers, or specific contents to help identification."
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-3.5 py-2 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-neutral-800/60 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-none"
+                    className="w-full px-3.5 py-2 editorial-input text-sm resize-none"
                   />
                 </div>
               </div>
 
               {/* SECTION 2: INSERT ITEM IMAGE */}
               <div className="space-y-2 pt-1">
-                <h4 className="text-xs font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400 font-semibold border-b border-neutral-200 dark:border-white/10 pb-1">
+                <h4 className="text-xs font-mono uppercase tracking-wider text-[#D95D39] font-bold border-b border-[#E3DCD0] pb-1">
                   2. Insert Item Image
                 </h4>
 
@@ -379,7 +414,7 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
 
                 <div 
                   onClick={() => fileInputRef.current?.click()}
-                  className="border-2 border-dashed border-neutral-300 dark:border-neutral-700 hover:border-indigo-500 rounded-2xl p-4 text-center cursor-pointer transition-all bg-neutral-50/50 dark:bg-neutral-800/30 flex flex-col items-center justify-center gap-2"
+                  className="editorial-dropzone p-4 text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-2"
                 >
                   {previewImage ? (
                     <div className="relative w-full h-40 rounded-xl overflow-hidden bg-black/40">
@@ -390,29 +425,29 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
                     </div>
                   ) : (
                     <>
-                      <div className="h-10 w-10 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                      <div className="h-10 w-10 rounded-full bg-[#EFE6D8] text-[#7C4A2D] flex items-center justify-center">
                         <Upload className="h-5 w-5" />
                       </div>
-                      <div className="text-xs text-neutral-600 dark:text-neutral-400">
-                        <span className="font-semibold text-indigo-600 dark:text-indigo-400">Click to upload item photo</span> or drag and drop
+                      <div className="text-xs text-[#5A625E]">
+                        <span className="font-semibold text-[#D95D39]">Click to upload item photo</span> or drag and drop
                       </div>
-                      <span className="text-[10px] text-neutral-400">PNG, JPG, WEBP (Saved directly to MySQL BLOB)</span>
+                      <span className="text-[10px] text-[#5A625E] font-mono">PNG, JPG, WEBP (Saved directly to MySQL BLOB)</span>
                     </>
                   )}
                 </div>
                 {errors.image && (
-                  <p className="text-[11px] text-rose-500 mt-1 flex items-center gap-1">
+                  <p className="text-[11px] text-[#A83C1D] mt-1 flex items-center gap-1">
                     <AlertTriangle className="h-3 w-3" /> {errors.image}
                   </p>
                 )}
               </div>
 
               {/* ACTION BUTTONS */}
-              <div className="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-neutral-200 dark:border-white/10">
+              <div className="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-[#E3DCD0]">
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-neutral-500 hover:text-neutral-900 dark:hover:text-white text-xs font-medium transition-all cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-[#5A625E] hover:text-[#1F2421] text-xs font-medium transition-all cursor-pointer"
                   title="Clear all fields"
                 >
                   <RotateCcw className="h-3.5 w-3.5" />
@@ -423,17 +458,13 @@ export default function ReportModal({ isOpen, type, onClose, onSubmit }: ReportM
                   <button
                     type="button"
                     onClick={onClose}
-                    className="px-4 py-2 rounded-xl border border-neutral-200 dark:border-white/10 hover:bg-neutral-100 dark:hover:bg-white/5 text-xs sm:text-sm font-medium transition-all cursor-pointer"
+                    className="btn-tactile-secondary px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className={`px-6 py-2.5 rounded-xl text-white text-xs sm:text-sm font-semibold shadow-lg transition-all cursor-pointer ${
-                      isLost 
-                        ? "bg-rose-600 hover:bg-rose-500 shadow-rose-600/30" 
-                        : "bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/30"
-                    }`}
+                    className="btn-tactile-primary px-6 py-2.5 rounded-xl text-white text-xs sm:text-sm font-bold cursor-pointer"
                   >
                     {isLost ? "Submit Lost Report" : "Register Found Item"}
                   </button>

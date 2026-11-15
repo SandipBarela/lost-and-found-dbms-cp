@@ -310,12 +310,12 @@ export default function AdminPage() {
   // Authentication Gate: Non-admin users cannot access this page!
   if (isAdminAuthorized === null) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-neutral-950 text-neutral-900 dark:text-white">
+      <div className="min-h-screen flex items-center justify-center bg-[#FAF7F2] text-[#1F2421]">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-10 w-10 rounded-2xl bg-purple-600 text-white font-mono font-bold flex items-center justify-center animate-pulse text-sm">
+          <div className="h-10 w-10 rounded-xl bg-[#D95D39] text-white font-mono font-bold flex items-center justify-center animate-pulse text-sm shadow-tactile-btn">
             AD
           </div>
-          <p className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">Checking Administrator clearance...</p>
+          <p className="text-sm font-semibold text-[#5A625E] font-sans">Checking Administrator clearance...</p>
         </div>
       </div>
     );
@@ -323,21 +323,21 @@ export default function AdminPage() {
 
   if (isAdminAuthorized === false) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-neutral-950 text-neutral-900 dark:text-white p-4">
-        <div className="max-w-md w-full p-8 rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-xl text-center space-y-4">
-          <div className="h-14 w-14 rounded-2xl bg-rose-500/10 text-rose-500 mx-auto flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-[#FAF7F2] text-[#1F2421] p-4">
+        <div className="max-w-md w-full p-8 rounded-[18px] border-[1.5px] border-[#CFC5B4] bg-white shadow-tactile-modal text-center space-y-4">
+          <div className="h-14 w-14 rounded-2xl bg-[#FAE6E0] text-[#D95D39] border border-[#ECC3B6] mx-auto flex items-center justify-center">
             <ShieldCheck className="h-7 w-7" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">Access Denied: Admin Only</h2>
-            <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-2 leading-relaxed">
+            <h2 className="font-serif text-2xl font-bold text-[#1F2421]">Access Denied: Admin Only</h2>
+            <p className="text-sm text-[#5A625E] mt-2 leading-relaxed font-sans">
               This portal is strictly restricted to institutional DBMS Administrators. Please log in with administrator credentials.
             </p>
           </div>
           <div className="pt-2 flex flex-col gap-2.5">
             <Link
               href="/login"
-              className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-md shadow-purple-600/30 transition-all"
+              className="btn-tactile-primary w-full py-3 flex items-center justify-center gap-2 text-sm"
             >
               <LogIn className="h-4 w-4" />
               <span>Log In with Admin Credentials</span>
@@ -349,10 +349,10 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-neutral-950 text-neutral-900 dark:text-white font-sans transition-colors duration-300">
+    <div className="min-h-screen bg-[#FAF7F2] text-[#1F2421] font-sans">
       {/* Toast Notification with Undo Action */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 shadow-2xl border border-neutral-700/40 text-sm font-semibold animate-in slide-in-from-bottom-5">
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-xl bg-[#1F2421] text-white shadow-tactile-modal border border-[#CFC5B4] text-sm font-semibold animate-in slide-in-from-bottom-5">
           <span>{toastMessage.text}</span>
           {toastMessage.undo && (
             <button
@@ -360,7 +360,7 @@ export default function AdminPage() {
                 toastMessage.undo?.();
                 setToastMessage(null);
               }}
-              className="ml-2 flex items-center gap-1 px-3 py-1 rounded-lg bg-white/20 dark:bg-neutral-900/20 hover:bg-white/30 text-amber-300 dark:text-amber-600 font-bold text-xs cursor-pointer"
+              className="ml-2 flex items-center gap-1 px-3 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-amber-300 font-bold text-xs cursor-pointer"
             >
               <Undo2 className="h-3.5 w-3.5" />
               <span>Undo</span>
@@ -370,7 +370,7 @@ export default function AdminPage() {
       )}
 
       {/* Top Admin Bar */}
-      <header className="sticky top-0 z-40 w-full border-b border-neutral-200/90 dark:border-white/10 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-md shadow-xs">
+      <header className="sticky top-0 z-40 w-full border-b border-[#E3DCD0] editorial-header shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button 
@@ -379,28 +379,28 @@ export default function AdminPage() {
                 sessionStorage.removeItem("lf_session_active");
                 window.location.href = "/login";
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-neutral-300 dark:border-white/10 text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 hover:border-transparent transition-colors cursor-pointer"
+              className="btn-tactile-secondary text-xs sm:text-sm flex items-center gap-1.5"
             >
               <LogIn className="h-4 w-4 rotate-180" />
               <span>Log Out</span>
             </button>
-            <div className="h-6 w-px bg-neutral-300 dark:bg-neutral-700" />
+            <div className="h-6 w-px bg-[#E3DCD0]" />
             <div className="flex items-center gap-2.5">
-              <div className="h-8 w-8 rounded-lg overflow-hidden bg-white shadow-xs p-0.5 border border-neutral-300 dark:border-white/10 shrink-0">
+              <div className="h-8 w-8 rounded-lg overflow-hidden bg-white shadow-xs p-0.5 border border-[#CFC5B4] shrink-0">
                 <img src="/reunite-logo.jpg" alt="ReUnite" className="h-full w-full object-contain" />
               </div>
-              <h1 className="font-extrabold text-lg sm:text-xl tracking-tight text-neutral-950 dark:text-white flex items-center gap-2">
+              <h1 className="font-serif font-bold text-lg sm:text-xl tracking-tight text-[#1F2421] flex items-center gap-2">
                 <span>
-                  <span className="text-[#0f294a] dark:text-[#93c5fd]">Re</span>
-                  <span className="text-[#ea580c] dark:text-[#fb923c]">Unite</span> Admin Console
+                  <span className="text-[#1F2421]">Re</span>
+                  <span className="text-[#D95D39]">Unite</span> Admin Console
                 </span>
               </h1>
             </div>
           </div>
 
           <div className="flex items-center gap-3 text-xs sm:text-sm font-mono">
-            <span className="hidden sm:inline font-bold text-neutral-700 dark:text-neutral-300">Campus DBMS Connected</span>
-            <span className="px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-bold border border-emerald-500/30">
+            <span className="hidden sm:inline font-bold text-[#5A625E]">Campus DBMS Connected</span>
+            <span className="badge-verified px-3 py-1 rounded-full font-bold">
               ● Live System Active
             </span>
           </div>
@@ -411,56 +411,56 @@ export default function AdminPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         {/* Metric KPI Overview - High Contrast & Crisp Fonts */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div className="p-5 rounded-3xl border-2 border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/80 shadow-sm">
-            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
+          <div className="p-5 rounded-2xl border border-[#CFC5B4] bg-white shadow-tactile-card">
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#5A625E] font-mono">
               Total Tracked Items
             </span>
-            <p className="text-3xl sm:text-4xl font-black mt-1 text-neutral-950 dark:text-white">{items.length}</p>
-            <span className="text-xs text-neutral-600 dark:text-neutral-400 font-bold mt-1.5 block">Campus inventory</span>
+            <p className="font-serif text-3xl sm:text-4xl font-black mt-1 text-[#1F2421]">{items.length}</p>
+            <span className="text-xs text-[#5A625E] font-semibold mt-1.5 block">Campus inventory</span>
           </div>
 
-          <div className="p-5 rounded-3xl border-2 border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/80 shadow-sm">
+          <div className="p-5 rounded-2xl border border-[#CFC5B4] bg-white shadow-tactile-card">
             <div className="flex items-center justify-between">
-              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#5A625E] font-mono">
                 Pending Claims
               </span>
-              <AlertTriangle className="h-4 w-4 text-amber-500" />
+              <AlertTriangle className="h-4 w-4 text-[#D95D39]" />
             </div>
-            <p className="text-3xl sm:text-4xl font-black mt-1 text-amber-600 dark:text-amber-400">
+            <p className="font-serif text-3xl sm:text-4xl font-black mt-1 text-[#D95D39]">
               {claims.filter(c => c.status === "Pending Review").length}
             </p>
-            <span className="text-xs text-amber-600 dark:text-amber-400 font-bold mt-1.5 block">Requires approval</span>
+            <span className="text-xs text-[#D95D39] font-semibold mt-1.5 block">Requires approval</span>
           </div>
 
-          <div className="p-5 rounded-3xl border-2 border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/80 shadow-sm">
-            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
+          <div className="p-5 rounded-2xl border border-[#CFC5B4] bg-white shadow-tactile-card">
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#5A625E] font-mono">
               Approved for Handover
             </span>
-            <p className="text-3xl sm:text-4xl font-black mt-1 text-emerald-600 dark:text-emerald-400">
+            <p className="font-serif text-3xl sm:text-4xl font-black mt-1 text-[#2D5A4C]">
               {claims.filter(c => c.status === "Verified & Approved" || c.status === "Handover Scheduled").length}
             </p>
-            <span className="text-xs text-emerald-600 dark:text-emerald-400 font-bold mt-1.5 block">Ready for student pickup</span>
+            <span className="text-xs text-[#2D5A4C] font-semibold mt-1.5 block">Ready for student pickup</span>
           </div>
 
-          <div className="p-5 rounded-3xl border-2 border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/80 shadow-sm">
-            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
+          <div className="p-5 rounded-2xl border border-[#CFC5B4] bg-white shadow-tactile-card">
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#5A625E] font-mono">
               Returned Items
             </span>
-            <p className="text-3xl sm:text-4xl font-black mt-1 text-indigo-600 dark:text-indigo-400">
+            <p className="font-serif text-3xl sm:text-4xl font-black mt-1 text-[#2D5A4C]">
               {claims.filter(c => c.status === "Returned" || c.status === "Handover Completed").length}
             </p>
-            <span className="text-xs text-indigo-600 dark:text-indigo-400 font-bold mt-1.5 block">Completed handovers</span>
+            <span className="text-xs text-[#2D5A4C] font-semibold mt-1.5 block">Completed handovers</span>
           </div>
         </div>
 
         {/* Clean 2-Tab Selector */}
-        <div className="flex items-center gap-3 border-b-2 border-neutral-200 dark:border-white/10 pb-4 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-3 border-b border-[#E3DCD0] pb-4 overflow-x-auto no-scrollbar">
           <button
             onClick={() => setActiveTab("claims")}
-            className={`px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all cursor-pointer flex items-center gap-2.5 whitespace-nowrap ${
+            className={`px-6 py-3 rounded-xl font-bold text-sm sm:text-base transition-all cursor-pointer flex items-center gap-2.5 whitespace-nowrap ${
               activeTab === "claims"
-                ? "bg-purple-600 text-white shadow-lg shadow-purple-600/30 scale-102"
-                : "bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                ? "btn-tactile-primary"
+                : "btn-tactile-secondary"
             }`}
           >
             <ShieldCheck className="h-5 w-5" />
@@ -469,10 +469,10 @@ export default function AdminPage() {
 
           <button
             onClick={() => setActiveTab("items")}
-            className={`px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all cursor-pointer flex items-center gap-2.5 whitespace-nowrap ${
+            className={`px-6 py-3 rounded-xl font-bold text-sm sm:text-base transition-all cursor-pointer flex items-center gap-2.5 whitespace-nowrap ${
               activeTab === "items"
-                ? "bg-purple-600 text-white shadow-lg shadow-purple-600/30 scale-102"
-                : "bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                ? "btn-tactile-primary"
+                : "btn-tactile-secondary"
             }`}
           >
             <Database className="h-5 w-5" />
@@ -481,21 +481,21 @@ export default function AdminPage() {
 
           <button
             onClick={() => setActiveTab("feedback")}
-            className={`px-6 py-3 rounded-2xl font-bold text-sm sm:text-base transition-all cursor-pointer flex items-center gap-2.5 whitespace-nowrap ${
+            className={`px-6 py-3 rounded-xl font-bold text-sm sm:text-base transition-all cursor-pointer flex items-center gap-2.5 whitespace-nowrap ${
               activeTab === "feedback"
-                ? "bg-purple-600 text-white shadow-lg shadow-purple-600/30 scale-102"
-                : "bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                ? "btn-tactile-primary"
+                : "btn-tactile-secondary"
             }`}
           >
-            <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+            <Star className="h-5 w-5 fill-current" />
             <span>3. Student Feedback ({feedbackList.length})</span>
           </button>
         </div>
 
         {/* NOTICEABLE & PROMINENT SEARCH & FILTER BAR */}
-        <div className="p-4 sm:p-5 rounded-3xl border-2 border-purple-500/30 dark:border-purple-500/20 bg-white dark:bg-neutral-900 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="p-4 sm:p-5 rounded-2xl border border-[#CFC5B4] bg-white shadow-tactile-card flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-3.5 h-5 w-5 text-purple-600 dark:text-purple-400" />
+            <Search className="absolute left-4 top-3.5 h-5 w-5 text-[#D95D39]" />
             <input
               type="text"
               placeholder={
@@ -507,12 +507,12 @@ export default function AdminPage() {
               }
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-10 py-3 rounded-2xl border-2 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-sm sm:text-base font-semibold text-neutral-950 dark:text-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+              className="editorial-input pl-12 pr-10 text-sm sm:text-base"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-3.5 p-1 rounded-full text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+                className="absolute right-3.5 top-3.5 p-1 rounded-full text-[#5A625E] hover:text-[#1F2421] hover:bg-[#F2ECE1] transition-colors cursor-pointer"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -522,15 +522,15 @@ export default function AdminPage() {
           {/* Quick Filters */}
           {activeTab === "feedback" ? (
             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
-              <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 dark:text-neutral-200 hidden sm:inline">Rating:</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#1F2421] font-mono hidden sm:inline">Rating:</span>
               {["All", "5", "4", "3"].map((r) => (
                 <button
                   key={r}
                   onClick={() => setFeedbackRatingFilter(r)}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer border ${
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer ${
                     feedbackRatingFilter === r
-                      ? "bg-amber-500 text-white shadow-md shadow-amber-500/30 border-transparent scale-105"
-                      : "bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                      ? "btn-tactile-primary"
+                      : "bg-white border border-[#CFC5B4] text-[#5A625E] hover:text-[#1F2421]"
                   }`}
                 >
                   {r === "All" ? "All Ratings" : `${r} ★`}
@@ -539,15 +539,15 @@ export default function AdminPage() {
             </div>
           ) : activeTab === "items" ? (
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 dark:text-neutral-200 hidden sm:inline">Type:</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#1F2421] font-mono hidden sm:inline">Type:</span>
               {["All", "Lost", "Found"].map((f) => (
                 <button
                   key={f}
                   onClick={() => setTypeFilter(f)}
                   className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                     typeFilter === f
-                      ? "bg-purple-600 text-white shadow-md shadow-purple-600/30 scale-105"
-                      : "bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                      ? "btn-tactile-primary"
+                      : "bg-white border border-[#CFC5B4] text-[#5A625E] hover:text-[#1F2421]"
                   }`}
                 >
                   {f}
@@ -556,20 +556,20 @@ export default function AdminPage() {
             </div>
           ) : (
             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
-              <span className="text-xs font-bold uppercase tracking-wider text-neutral-800 dark:text-neutral-200 hidden sm:inline">Status:</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#1F2421] font-mono hidden sm:inline">Status:</span>
               {[
-                { key: "All", label: "All", activeClass: "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 shadow-md" },
-                { key: "Approved", label: "Approved", activeClass: "bg-emerald-600 text-white shadow-md shadow-emerald-600/30 border-emerald-600" },
-                { key: "Pending", label: "Pending", activeClass: "bg-amber-600 text-white shadow-md shadow-amber-600/30 border-amber-600" },
-                { key: "Rejected", label: "Rejected", activeClass: "bg-rose-600 text-white shadow-md shadow-rose-600/30 border-rose-600" },
-              ].map(({ key, label, activeClass }) => (
+                { key: "All", label: "All" },
+                { key: "Approved", label: "Approved" },
+                { key: "Pending", label: "Pending" },
+                { key: "Rejected", label: "Rejected" },
+              ].map(({ key, label }) => (
                 <button
                   key={key}
                   onClick={() => setClaimStatusFilter(key)}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer border ${
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer ${
                     claimStatusFilter === key
-                      ? `${activeClass} scale-105 border-transparent`
-                      : "bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border-neutral-300 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                      ? "btn-tactile-primary"
+                      : "bg-white border border-[#CFC5B4] text-[#5A625E] hover:text-[#1F2421]"
                   }`}
                 >
                   {label}
@@ -582,10 +582,10 @@ export default function AdminPage() {
         {/* TAB 1: CLAIMS APPROVAL CENTER (Primary Operational Hub) */}
         {activeTab === "claims" && (
           <div className="space-y-4">
-            <div className="rounded-3xl border-2 border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 overflow-hidden shadow-sm">
+            <div className="rounded-2xl border border-[#CFC5B4] bg-white overflow-hidden shadow-tactile-card">
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
-                  <thead className="bg-neutral-100 dark:bg-neutral-800 border-b-2 border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 font-bold uppercase text-xs sm:text-sm tracking-wider">
+                  <thead className="bg-[#F2ECE1] border-b border-[#CFC5B4] text-[#1F2421] font-bold uppercase text-xs tracking-wider font-mono">
                     <tr>
                       <th className="py-4 px-5">Claim ID</th>
                       <th className="py-4 px-5">Claimant Name</th>
@@ -595,52 +595,52 @@ export default function AdminPage() {
                       <th className="py-4 px-5 text-right">Admin Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-neutral-200 dark:divide-white/10">
+                  <tbody className="divide-y divide-[#E3DCD0]">
                     {filteredClaims.length === 0 ? (
                       <tr>
-                        <td colSpan={6} className="py-12 text-center text-sm font-semibold text-neutral-500">
+                        <td colSpan={6} className="py-12 text-center text-sm font-semibold text-[#5A625E]">
                           No claims match your search query &quot;{searchQuery}&quot;.
                         </td>
                       </tr>
                     ) : (
                       filteredClaims.map((claim, idx) => (
-                        <tr key={`claim-${claim.id}-${idx}`} className="hover:bg-neutral-50 dark:hover:bg-neutral-800/40 transition-colors">
-                          <td className="py-4 px-5 font-mono font-extrabold text-sm sm:text-base text-neutral-950 dark:text-white">
+                        <tr key={`claim-${claim.id}-${idx}`} className="hover:bg-[#FAF7F2] transition-colors">
+                          <td className="py-4 px-5 font-mono font-bold text-sm sm:text-base text-[#1F2421]">
                             {claim.id}
                           </td>
                           <td className="py-4 px-5">
-                            <p className="font-bold text-sm sm:text-base text-neutral-950 dark:text-white">{claim.claimantName}</p>
-                            <span className="text-xs font-mono font-bold text-neutral-700 dark:text-neutral-300">PRN: {claim.prnNumber}</span>
+                            <p className="font-bold text-sm sm:text-base text-[#1F2421]">{claim.claimantName}</p>
+                            <span className="text-xs font-mono text-[#5A625E]">PRN: {claim.prnNumber}</span>
                           </td>
                           <td className="py-4 px-5">
-                            <p className="font-bold text-sm sm:text-base text-neutral-950 dark:text-white">{claim.itemTitle}</p>
-                            <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+                            <p className="font-bold text-sm sm:text-base text-[#1F2421]">{claim.itemTitle}</p>
+                            <span className="text-xs text-[#5A625E]">
                               Linked ID: #{claim.itemId} • {claim.category}
                             </span>
                           </td>
-                          <td className="py-4 px-5 max-w-xs text-neutral-800 dark:text-neutral-200">
-                            <p className="text-xs sm:text-sm line-clamp-2 leading-snug">
+                          <td className="py-4 px-5 max-w-xs text-[#1F2421]">
+                            <p className="text-xs sm:text-sm line-clamp-2 leading-snug italic">
                               &quot;{claim.proofDetail}&quot;
                             </p>
                           </td>
                           <td className="py-4 px-5">
                             {claim.status === "Verified & Approved" || claim.status === "Handover Scheduled" || claim.status === "Returned" || claim.status === "Handover Completed" ? (
-                              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-600 text-white shadow-xs">
+                              <span className="badge-verified inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold">
                                 <CheckCircle2 className="h-3.5 w-3.5" />
                                 {claim.status === "Handover Completed" || claim.status === "Returned" ? "Returned ✓" : claim.status === "Handover Scheduled" ? "Handover Scheduled" : "Approved ✓"}
                               </span>
                             ) : claim.status === "Rejected" ? (
-                              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold bg-rose-600 text-white shadow-xs">
+                              <span className="badge-alert inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold">
                                 <XCircle className="h-3.5 w-3.5" />
                                 Rejected ✕
                               </span>
                             ) : (
-                              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/30">
+                              <span className="badge-campus inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-mono font-bold">
                                 Pending Review
                               </span>
                             )}
                             {claim.token && (
-                              <span className="block font-mono text-xs font-bold text-neutral-800 dark:text-neutral-200 mt-1">
+                              <span className="block font-mono text-xs font-bold text-[#D95D39] mt-1">
                                 Pass: {claim.token}
                               </span>
                             )}
@@ -650,14 +650,14 @@ export default function AdminPage() {
                               <div className="inline-flex items-center gap-2">
                                 <button
                                   onClick={() => handleUpdateClaimStatus(claim.id, "Verified & Approved")}
-                                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold transition-all shadow-md shadow-emerald-600/25 cursor-pointer inline-flex items-center gap-1.5"
+                                  className="btn-tactile-primary text-xs py-2 px-3.5 inline-flex items-center gap-1.5"
                                 >
                                   <CheckCircle2 className="h-4 w-4" />
                                   <span>Approve</span>
                                 </button>
                                 <button
                                   onClick={() => handleUpdateClaimStatus(claim.id, "Rejected")}
-                                  className="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs sm:text-sm font-bold transition-all shadow-md shadow-rose-600/25 cursor-pointer inline-flex items-center gap-1.5"
+                                  className="badge-alert text-xs py-2 px-3.5 rounded-xl border font-bold inline-flex items-center gap-1.5 cursor-pointer"
                                 >
                                   <XCircle className="h-4 w-4" />
                                   <span>Reject</span>
@@ -666,13 +666,13 @@ export default function AdminPage() {
                             )}
                             {(claim.status === "Verified & Approved" || claim.status === "Handover Scheduled") && (
                               <div className="inline-flex items-center gap-2">
-                                <span className="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs sm:text-sm font-bold inline-flex items-center gap-1.5 shadow-xs">
+                                <span className="badge-verified px-3 py-1.5 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">
                                   <CheckCircle2 className="h-3.5 w-3.5" />
                                   <span>Approved</span>
                                 </span>
                                 <button
                                   onClick={() => handleUpdateClaimStatus(claim.id, "Returned")}
-                                  className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs sm:text-sm font-bold transition-all shadow-md shadow-purple-600/25 cursor-pointer inline-flex items-center gap-1.5"
+                                  className="btn-tactile-primary text-xs py-2 px-3.5 inline-flex items-center gap-1.5"
                                   title="Student arrived with PRN - sign off and return item"
                                 >
                                   <ShieldCheck className="h-4 w-4" />
@@ -680,7 +680,7 @@ export default function AdminPage() {
                                 </button>
                                 <button
                                   onClick={() => handleUpdateClaimStatus(claim.id, "Rejected")}
-                                  className="px-2.5 py-1.5 rounded-xl border border-rose-300 dark:border-rose-800 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white text-xs font-bold transition-all cursor-pointer"
+                                  className="badge-alert text-xs py-1.5 px-2.5 rounded-xl border font-bold cursor-pointer"
                                   title="Revoke and reject claim"
                                 >
                                   Reject
@@ -689,20 +689,20 @@ export default function AdminPage() {
                             )}
                             {claim.status === "Rejected" && (
                               <div className="inline-flex items-center gap-2">
-                                <span className="px-3.5 py-1.5 rounded-xl bg-rose-600 text-white text-xs sm:text-sm font-bold inline-flex items-center gap-1.5 shadow-xs">
+                                <span className="badge-alert px-3.5 py-1.5 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">
                                   <XCircle className="h-4 w-4" />
                                   <span>Rejected</span>
                                 </span>
                                 <button
                                   onClick={() => handleUpdateClaimStatus(claim.id, "Verified & Approved")}
-                                  className="px-3 py-1.5 rounded-xl border-2 border-emerald-600 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-600 hover:text-white text-xs font-bold transition-all cursor-pointer"
+                                  className="badge-verified px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border"
                                 >
                                   Approve instead
                                 </button>
                               </div>
                             )}
                             {(claim.status === "Returned" || claim.status === "Handover Completed") && (
-                              <span className="text-xs sm:text-sm font-mono text-emerald-600 dark:text-emerald-400 font-extrabold flex items-center justify-end gap-1.5">
+                              <span className="text-xs sm:text-sm font-mono text-[#2D5A4C] font-extrabold flex items-center justify-end gap-1.5">
                                 <CheckCircle2 className="h-4 w-4" />
                                 Returned
                               </span>
@@ -721,10 +721,10 @@ export default function AdminPage() {
         {/* TAB 2: INVENTORY MASTER */}
         {activeTab === "items" && (
           <div className="space-y-4">
-            <div className="rounded-3xl border-2 border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 overflow-hidden shadow-sm">
+            <div className="rounded-2xl border border-[#CFC5B4] bg-white overflow-hidden shadow-tactile-card">
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
-                  <thead className="bg-neutral-100 dark:bg-neutral-800 border-b-2 border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 font-bold uppercase text-xs sm:text-sm tracking-wider">
+                  <thead className="bg-[#F2ECE1] border-b border-[#CFC5B4] text-[#1F2421] font-bold uppercase text-xs tracking-wider font-mono">
                     <tr>
                       <th className="py-4 px-5">Item ID & Image</th>
                       <th className="py-4 px-5">Title & Category</th>
@@ -734,42 +734,42 @@ export default function AdminPage() {
                       <th className="py-4 px-5 text-right">Clean-up Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-neutral-200 dark:divide-white/10">
+                  <tbody className="divide-y divide-[#E3DCD0]">
                     {filteredItems.length === 0 ? (
                       <tr>
-                        <td colSpan={6} className="py-12 text-center text-sm font-semibold text-neutral-500">
+                        <td colSpan={6} className="py-12 text-center text-sm font-semibold text-[#5A625E]">
                           No inventory items match your search query &quot;{searchQuery}&quot;.
                         </td>
                       </tr>
                     ) : (
                       filteredItems.map(item => (
-                        <tr key={`${item.type}-${item.id}`} className="hover:bg-neutral-50 dark:hover:bg-neutral-800/40 transition-colors">
+                        <tr key={`${item.type}-${item.id}`} className="hover:bg-[#FAF7F2] transition-colors">
                           <td className="py-4 px-5">
                             <div className="flex items-center gap-3">
-                              <img src={item.image} alt={item.title} className="h-12 w-12 rounded-xl object-cover border border-neutral-200 dark:border-white/10" />
+                              <img src={item.image} alt={item.title} className="h-12 w-12 rounded-lg object-cover border border-[#E3DCD0]" />
                               <div>
-                                <span className="font-mono font-extrabold text-sm sm:text-base text-neutral-950 dark:text-white">#{item.id}</span>
-                                <span className={`block text-xs font-mono font-bold uppercase ${item.type === "lost" ? "text-rose-600 dark:text-rose-400" : "text-emerald-600 dark:text-emerald-400"}`}>
+                                <span className="font-mono font-bold text-sm sm:text-base text-[#1F2421]">#{item.id}</span>
+                                <span className={`badge-pill uppercase text-[10px] font-mono font-bold block ${item.type === "lost" ? "badge-alert" : "badge-verified"}`}>
                                   {item.type}
                                 </span>
                               </div>
                             </div>
                           </td>
                           <td className="py-4 px-5">
-                            <p className="font-bold text-sm sm:text-base text-neutral-950 dark:text-white">{item.title}</p>
-                            <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">{item.category}</span>
+                            <p className="font-bold text-sm sm:text-base text-[#1F2421]">{item.title}</p>
+                            <span className="text-xs text-[#5A625E]">{item.category}</span>
                           </td>
-                          <td className="py-4 px-5 text-xs sm:text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                          <td className="py-4 px-5 text-xs sm:text-sm text-[#1F2421]">
                             {item.location}
                           </td>
-                          <td className="py-4 px-5 font-mono font-bold text-xs sm:text-sm text-neutral-800 dark:text-neutral-200">
+                          <td className="py-4 px-5 font-mono text-xs sm:text-sm text-[#5A625E]">
                             {item.prnNumber}
                           </td>
                           <td className="py-4 px-5">
                             <span className={`font-mono text-xs font-bold px-3 py-1 rounded-full ${
                               item.status === "Returned" 
-                                ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30" 
-                                : "text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40"
+                                ? "badge-verified" 
+                                : "badge-campus"
                             }`}>
                               {item.status === "Returned" ? "Returned ✓" : item.status}
                             </span>
@@ -778,7 +778,7 @@ export default function AdminPage() {
                             <button
                               onClick={() => handleDeleteItem(item.id)}
                               title="Delete fake, duplicate, or expired report from DBMS"
-                              className="px-3.5 py-2 rounded-xl border border-rose-300 dark:border-rose-800 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white text-xs sm:text-sm font-bold transition-all cursor-pointer inline-flex items-center gap-1.5 shadow-xs"
+                              className="badge-alert text-xs py-2 px-3.5 rounded-xl border font-bold inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
                             >
                               <Trash2 className="h-4 w-4" />
                               <span>Delete Report</span>
@@ -797,25 +797,25 @@ export default function AdminPage() {
         {/* VIEW 3: STUDENT FEEDBACK MANAGEMENT */}
         {activeTab === "feedback" && (
           <div className="space-y-4">
-            <div className="rounded-3xl border-2 border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-sm overflow-hidden">
-              <div className="p-5 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+            <div className="rounded-2xl border border-[#CFC5B4] bg-white shadow-tactile-card overflow-hidden">
+              <div className="p-5 border-b border-[#E3DCD0] bg-[#FAF7F2] flex items-center justify-between">
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white flex items-center gap-2">
-                    <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+                  <h3 className="font-serif text-base sm:text-lg font-bold text-[#1F2421] flex items-center gap-2">
+                    <Star className="h-5 w-5 fill-[#D95D39] text-[#D95D39]" />
                     <span>Campus Student Feedback Table</span>
-                    <span className="text-xs px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-bold">
+                    <span className="badge-campus text-xs px-2.5 py-1 rounded-full font-mono font-bold">
                       {filteredFeedback.length} entries
                     </span>
                   </h3>
-                  <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-0.5">
-                    Live feedback records from table <code className="font-mono text-purple-600 dark:text-purple-400">feedback</code> linked with <code className="font-mono text-purple-600 dark:text-purple-400">users</code>, <code className="font-mono text-purple-600 dark:text-purple-400">claim</code>, and <code className="font-mono text-purple-600 dark:text-purple-400">found_item</code>
+                  <p className="text-xs sm:text-sm text-[#5A625E] mt-0.5">
+                    Live feedback records from table <code className="font-mono text-[#D95D39]">feedback</code> linked with <code className="font-mono text-[#D95D39]">users</code>, <code className="font-mono text-[#D95D39]">claim</code>, and <code className="font-mono text-[#D95D39]">found_item</code>
                   </p>
                 </div>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
-                  <thead className="bg-neutral-100 dark:bg-neutral-800 border-b-2 border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100 font-bold uppercase text-xs sm:text-sm tracking-wider">
+                  <thead className="bg-[#F2ECE1] border-b border-[#CFC5B4] text-[#1F2421] font-bold uppercase text-xs tracking-wider font-mono">
                     <tr>
                       <th className="py-4 px-5">ID & Student</th>
                       <th className="py-4 px-5">Rating</th>
@@ -826,24 +826,24 @@ export default function AdminPage() {
                       <th className="py-4 px-5 text-right">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-neutral-200 dark:divide-white/10">
+                  <tbody className="divide-y divide-[#E3DCD0]">
                     {filteredFeedback.length === 0 ? (
                       <tr>
-                        <td colSpan={7} className="py-12 text-center text-sm font-semibold text-neutral-500">
+                        <td colSpan={7} className="py-12 text-center text-sm font-semibold text-[#5A625E]">
                           No student feedback matches your search &quot;{searchQuery}&quot;.
                         </td>
                       </tr>
                     ) : (
                       filteredFeedback.map((f: any) => (
-                        <tr key={f.feedback_id} className="hover:bg-neutral-50 dark:hover:bg-neutral-800/40 transition-colors">
+                        <tr key={f.feedback_id} className="hover:bg-[#FAF7F2] transition-colors">
                           <td className="py-4 px-5">
-                            <span className="font-mono font-extrabold text-sm text-neutral-950 dark:text-white">
+                            <span className="font-mono font-bold text-sm text-[#1F2421]">
                               #{f.feedback_id}
                             </span>
-                            <p className="font-bold text-xs sm:text-sm text-neutral-900 dark:text-white mt-0.5">
+                            <p className="font-bold text-xs sm:text-sm text-[#1F2421] mt-0.5">
                               {f.student_name || "Student"}
                             </p>
-                            <span className="font-mono text-[11px] text-neutral-500">
+                            <span className="font-mono text-[11px] text-[#5A625E]">
                               PRN: {f.prn_number || "Verified"}
                             </span>
                           </td>
@@ -854,47 +854,47 @@ export default function AdminPage() {
                                   key={s}
                                   className={`h-4 w-4 ${
                                     s <= Number(f.rating)
-                                      ? "fill-amber-400 text-amber-400"
-                                      : "text-neutral-300 dark:text-neutral-600"
+                                      ? "fill-[#D95D39] text-[#D95D39]"
+                                      : "text-[#CFC5B4]"
                                   }`}
                                 />
                               ))}
-                              <span className="ml-1 text-xs font-bold text-neutral-700 dark:text-neutral-300">
+                              <span className="ml-1 text-xs font-bold text-[#1F2421] font-mono">
                                 {f.rating}/5
                               </span>
                             </div>
                           </td>
                           <td className="py-4 px-5">
-                            <span className="text-xs px-2.5 py-1 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-semibold">
+                            <span className="badge-campus text-xs px-2.5 py-1 rounded-lg font-mono">
                               {f.category}
                             </span>
                           </td>
                           <td className="py-4 px-5 max-w-xs">
-                            <p className="text-xs sm:text-sm text-neutral-800 dark:text-neutral-200 line-clamp-3">
+                            <p className="text-xs sm:text-sm text-[#1F2421] line-clamp-3">
                               {f.comments}
                             </p>
                           </td>
                           <td className="py-4 px-5">
                             {f.claim_code ? (
-                              <span className="font-mono text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
+                              <span className="badge-campus font-mono text-xs px-2 py-0.5 rounded">
                                 {f.claim_code}
                               </span>
                             ) : f.item_title ? (
-                              <span className="text-xs text-neutral-600 dark:text-neutral-400">
+                              <span className="text-xs text-[#5A625E]">
                                 {f.item_title}
                               </span>
                             ) : (
-                              <span className="text-xs text-neutral-400 italic">General</span>
+                              <span className="text-xs text-[#5A625E] italic">General</span>
                             )}
                           </td>
-                          <td className="py-4 px-5 text-xs font-mono text-neutral-600 dark:text-neutral-400">
+                          <td className="py-4 px-5 text-xs font-mono text-[#5A625E]">
                             {f.created_at ? new Date(f.created_at).toLocaleDateString() : "Recent"}
                           </td>
                           <td className="py-4 px-5 text-right">
                             <span className={`text-xs font-bold px-3 py-1 rounded-full ${
                               f.status === "Reviewed"
-                                ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
-                                : "bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30"
+                                ? "badge-verified"
+                                : "badge-campus"
                             }`}>
                               {f.status || "Submitted"}
                             </span>

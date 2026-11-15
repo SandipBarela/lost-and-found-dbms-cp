@@ -63,8 +63,8 @@ export async function GET(request: Request) {
           return NextResponse.redirect(image_data.toString("utf8"));
         }
 
-        // Only stream if it's a real photo (> 150 bytes)
-        if (image_data.length > 150) {
+        // Only stream if it's a real photo (> 250 bytes, not the 1x1 dummy transparent pixel)
+        if (image_data.length > 250) {
           return new NextResponse(new Uint8Array(image_data), {
             status: 200,
             headers: {

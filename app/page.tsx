@@ -26,19 +26,19 @@ export default function Home() {
   // While checking authentication, show clean branded loading screen
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-neutral-950 text-neutral-900 dark:text-white">
+      <div className="min-h-screen w-full flex items-center justify-center bg-[#FAF7F2] text-[#1F2421]">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-11 w-11 rounded-2xl bg-indigo-600 text-white font-mono font-bold flex items-center justify-center animate-pulse shadow-lg shadow-indigo-600/30">
+          <div className="h-11 w-11 rounded-xl bg-[#D95D39] text-white font-mono font-bold flex items-center justify-center animate-pulse shadow-tactile-btn">
             LF
           </div>
-          <p className="text-sm font-bold text-neutral-800 dark:text-neutral-200">Checking credentials & entering portal...</p>
+          <p className="text-sm font-bold text-[#1F2421] font-sans">Checking credentials & entering portal...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen w-full flex flex-col bg-white dark:bg-neutral-950 transition-colors duration-300">
+    <main className="min-h-screen w-full flex flex-col bg-[#FAF7F2] text-[#1F2421]">
       {/* Navbar fixed permanently at the top */}
       <GlobalNavbar />
 

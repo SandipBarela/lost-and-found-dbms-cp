@@ -158,23 +158,23 @@ export default function NotificationsModal({
 
   return (
     <div 
-      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 editorial-modal-backdrop animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div 
-        className="relative w-full max-w-2xl h-[85vh] max-h-[660px] rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-2xl flex flex-col text-neutral-900 dark:text-white overflow-hidden"
+        className="relative w-full max-w-2xl h-[85vh] max-h-[660px] editorial-modal-container flex flex-col text-[#1F2421] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Undo Toast */}
         {undoToast && (
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-4 py-2 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 border border-neutral-700 shadow-xl text-xs font-semibold animate-in slide-in-from-top-3">
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-4 py-2 rounded-xl bg-[#1F2421] text-white border border-[#CFC5B4] shadow-tactile-modal text-xs font-semibold animate-in slide-in-from-top-3">
             <span>{undoToast.message}</span>
             <button
               onClick={() => {
                 undoToast.undo();
                 setUndoToast(null);
               }}
-              className="ml-2 flex items-center gap-1 px-2 py-0.5 rounded-lg bg-white/20 dark:bg-neutral-900/20 hover:bg-white/30 text-amber-300 dark:text-amber-600 font-bold cursor-pointer"
+              className="ml-2 flex items-center gap-1 px-2 py-0.5 rounded-lg bg-[#FAF7F2]/20 hover:bg-[#FAF7F2]/30 text-[#FAF7F2] font-bold cursor-pointer"
             >
               <Undo2 className="h-3 w-3" />
               <span>Undo</span>
@@ -183,23 +183,23 @@ export default function NotificationsModal({
         )}
 
         {/* Header with Explicit Closing Option */}
-        <div className="p-5 sm:p-6 border-b border-neutral-200 dark:border-white/10 flex items-center justify-between shrink-0 bg-white dark:bg-neutral-900">
+        <div className="p-5 sm:p-6 border-b border-[#E3DCD0] flex items-center justify-between shrink-0 bg-[#FAF7F2]">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+            <div className="h-10 w-10 rounded-xl bg-[#F2ECE1] text-[#D95D39] border border-[#E3DCD0] flex items-center justify-center shrink-0">
               <Bell className="h-5 w-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
+                <h2 className="font-serif text-xl font-bold tracking-tight text-[#1F2421]">
                   Instant Notifications
                 </h2>
                 {unreadCount > 0 && (
-                  <span className="px-2 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                  <span className="badge-alert px-2 py-0.5 rounded-full text-[11px] font-mono font-semibold">
                     {unreadCount} new
                   </span>
                 )}
               </div>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+              <p className="text-xs text-[#5A625E] mt-0.5 font-sans">
                 Automated campus alerts & matching updates
               </p>
             </div>
@@ -209,7 +209,7 @@ export default function NotificationsModal({
           <button
             onClick={onClose}
             aria-label="Close notification panel"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 text-xs font-medium text-neutral-700 dark:text-neutral-300 transition-all cursor-pointer"
+            className="btn-tactile-secondary text-xs flex items-center gap-1.5"
           >
             <X className="h-4 w-4" />
             <span>Close</span>
@@ -217,34 +217,34 @@ export default function NotificationsModal({
         </div>
 
         {/* Action Controls & Filters */}
-        <div className="px-5 sm:px-6 py-2.5 border-b border-neutral-200 dark:border-neutral-800 flex flex-wrap items-center justify-between gap-2 bg-neutral-50 dark:bg-neutral-900/80 shrink-0 text-xs">
-          <div className="flex items-center gap-1">
+        <div className="px-5 sm:px-6 py-2.5 border-b border-[#E3DCD0] flex flex-wrap items-center justify-between gap-2 bg-[#F2ECE1]/50 shrink-0 text-xs">
+          <div className="flex items-center gap-1.5">
             <button
               onClick={() => setFilter("all")}
-              className={`px-3 py-1.5 rounded-xl font-medium transition-colors cursor-pointer text-xs ${
+              className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer text-xs ${
                 filter === "all" 
-                  ? "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 shadow-sm" 
-                  : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                  ? "btn-tactile-primary py-1 px-3" 
+                  : "bg-white border border-[#CFC5B4] text-[#5A625E] hover:text-[#1F2421]"
               }`}
             >
               All ({notifications.length})
             </button>
             <button
               onClick={() => setFilter("unread")}
-              className={`px-3 py-1.5 rounded-xl font-medium transition-colors cursor-pointer text-xs ${
+              className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer text-xs ${
                 filter === "unread" 
-                  ? "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 shadow-sm" 
-                  : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                  ? "btn-tactile-primary py-1 px-3" 
+                  : "bg-white border border-[#CFC5B4] text-[#5A625E] hover:text-[#1F2421]"
               }`}
             >
               Unread ({unreadCount})
             </button>
             <button
               onClick={() => setFilter("matches")}
-              className={`px-3 py-1.5 rounded-xl font-medium transition-colors cursor-pointer text-xs ${
+              className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer text-xs ${
                 filter === "matches" 
-                  ? "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 shadow-sm" 
-                  : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+                  ? "btn-tactile-primary py-1 px-3" 
+                  : "bg-white border border-[#CFC5B4] text-[#5A625E] hover:text-[#1F2421]"
               }`}
             >
               Match Alerts
@@ -255,7 +255,7 @@ export default function NotificationsModal({
             {unreadCount > 0 && (
               <button
                 onClick={markAllRead}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-medium transition-colors cursor-pointer text-[11px]"
+                className="btn-tactile-secondary text-[11px] py-1 px-2.5 flex items-center gap-1"
               >
                 <CheckCheck className="h-3.5 w-3.5" />
                 <span>Mark all read</span>
@@ -263,7 +263,7 @@ export default function NotificationsModal({
             )}
             <button
               onClick={clearAll}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-lg border border-rose-200 dark:border-rose-900/30 hover:bg-rose-500/10 text-rose-600 dark:text-rose-400 font-medium transition-colors cursor-pointer text-[11px]"
+              className="badge-alert text-[11px] py-1 px-2.5 rounded-lg border font-medium flex items-center gap-1 cursor-pointer"
             >
               <Trash2 className="h-3.5 w-3.5" />
               <span>Clear</span>
@@ -274,32 +274,32 @@ export default function NotificationsModal({
         {/* Notifications List */}
         <div className="flex-1 overflow-y-auto min-h-0 p-5 sm:p-6 space-y-3">
           {filteredNotifs.length === 0 ? (
-            <div className="py-16 text-center text-neutral-500">
-              <Bell className="h-10 w-10 mx-auto text-neutral-400 dark:text-neutral-600 mb-2 stroke-1" />
-              <p className="text-base font-semibold text-neutral-800 dark:text-neutral-200">No notifications in this view.</p>
-              <p className="text-xs text-neutral-500 mt-0.5">You are completely up to date.</p>
+            <div className="py-16 text-center text-[#5A625E]">
+              <Bell className="h-10 w-10 mx-auto text-[#5A625E] mb-2 stroke-1" />
+              <p className="font-serif text-base font-semibold text-[#1F2421]">No notifications in this view.</p>
+              <p className="text-xs text-[#5A625E] mt-0.5">You are completely up to date.</p>
             </div>
           ) : (
             filteredNotifs.map((n, idx) => (
               <div
                 key={`notif-${n.id}-${idx}`}
                 onClick={() => handleCardClick(n)}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer relative group ${
+                className={`p-4 rounded-xl border transition-all cursor-pointer relative group shadow-tactile-card bg-white ${
                   !n.read
-                    ? "border-amber-500/30 bg-amber-500/[0.04] dark:bg-amber-500/[0.06] shadow-sm hover:border-amber-500/50"
-                    : "border-neutral-200 dark:border-white/5 hover:border-neutral-300 dark:hover:border-white/10 bg-white dark:bg-neutral-850"
+                    ? "border-[1.5px] border-[#D95D39] ring-1 ring-[#D95D39]/30"
+                    : "border-[#E3DCD0] hover:border-[#CFC5B4]"
                 }`}
               >
                 {!n.read && (
-                  <span className="absolute top-4 right-4 h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+                  <span className="absolute top-4 right-4 h-2.5 w-2.5 rounded-full bg-[#D95D39] animate-pulse" />
                 )}
                 <div className="flex items-start gap-3.5">
-                  <div className={`h-9 w-9 rounded-xl shrink-0 flex items-center justify-center font-bold ${
+                  <div className={`h-9 w-9 rounded-lg shrink-0 flex items-center justify-center font-bold ${
                     n.type === "match"
-                      ? "bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20"
+                      ? "badge-campus"
                       : n.type === "handover"
-                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
-                      : "bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20"
+                      ? "badge-verified"
+                      : "badge-campus"
                   }`}>
                     {n.type === "match" ? (
                       <Sparkles className="h-4 w-4" />
@@ -310,14 +310,14 @@ export default function NotificationsModal({
                     )}
                   </div>
                   <div className="flex-1 min-w-0 pr-4">
-                    <h4 className="text-sm font-semibold text-neutral-900 dark:text-white mb-0.5">
+                    <h4 className="text-sm font-semibold text-[#1F2421] mb-0.5 font-sans">
                       {n.title}
                     </h4>
-                    <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-2">
+                    <p className="text-xs text-[#5A625E] leading-relaxed mb-2 font-sans">
                       {n.message}
                     </p>
-                    <div className="flex items-center justify-between text-xs font-mono text-neutral-400 mt-2">
-                      <span className="flex items-center gap-1 text-[11px] text-neutral-500">
+                    <div className="flex items-center justify-between text-xs font-mono text-[#5A625E] mt-2">
+                      <span className="flex items-center gap-1 text-[11px] text-[#5A625E]">
                         <Clock className="h-3 w-3" /> {n.timestamp}
                       </span>
                       <button
@@ -326,7 +326,7 @@ export default function NotificationsModal({
                           e.stopPropagation();
                           handleCardClick(n);
                         }}
-                        className="text-purple-600 dark:text-purple-400 hover:text-purple-500 dark:hover:text-purple-300 text-xs font-bold transition-all cursor-pointer underline flex items-center gap-1"
+                        className="text-[#D95D39] hover:text-[#C04B29] text-xs font-bold transition-all cursor-pointer underline flex items-center gap-1"
                       >
                         {n.type === "match" ? "Open Match Engine →" : n.type === "handover" ? "View Pass Details →" : "View Details →"}
                       </button>
@@ -339,16 +339,16 @@ export default function NotificationsModal({
         </div>
 
         {/* Bottom Bar: SMS Alerts and Bottom Close Button */}
-        <div className="p-3.5 px-5 sm:px-6 border-t border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-neutral-900 shrink-0 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2 text-neutral-600 dark:text-neutral-400 font-medium">
-            <Smartphone className="h-4 w-4 text-neutral-500 shrink-0" />
+        <div className="p-3.5 px-5 sm:px-6 border-t border-[#E3DCD0] bg-[#FAF7F2] shrink-0 flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2 text-[#5A625E] font-medium">
+            <Smartphone className="h-4 w-4 text-[#5A625E] shrink-0" />
             <span className="text-xs">Instant SMS alerts:</span>
             <button
               onClick={() => setSmsAlertsEnabled(!smsAlertsEnabled)}
               className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold transition-colors cursor-pointer ${
                 smsAlertsEnabled
-                  ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
-                  : "bg-neutral-200 dark:bg-neutral-800 text-neutral-500"
+                  ? "badge-verified font-bold"
+                  : "badge-campus"
               }`}
             >
               {smsAlertsEnabled ? "ENABLED" : "DISABLED"}
@@ -358,7 +358,7 @@ export default function NotificationsModal({
           {/* SECOND EXPLICIT CLOSE OPTION AT FOOTER */}
           <button
             onClick={onClose}
-            className="px-3.5 py-1.5 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 text-xs font-medium transition-all cursor-pointer shadow-sm"
+            className="btn-tactile-secondary text-xs"
           >
             Close Panel
           </button>

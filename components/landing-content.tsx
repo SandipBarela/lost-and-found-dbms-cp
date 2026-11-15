@@ -29,45 +29,99 @@ const FALLBACK_CATEGORY_IMAGES: Record<string, string[]> = {
     "Laptops & Accessories": [
         "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600&q=80",
         "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=600&q=80",
-        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80"
+        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80"
     ],
     "Electronics": [
         "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80",
         "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80",
-        "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80"
+        "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=600&q=80"
     ],
     "ID Cards & Wallets": [
         "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80",
-        "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80"
+        "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1607344645866-009c320b5ab8?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1614036417651-efe5912149d8?auto=format&fit=crop&w=600&q=80"
     ],
     "Keys & Badges": [
         "https://images.unsplash.com/photo-1666346166849-8443c47f50fa?auto=format&fit=crop&w=600&q=80",
-        "https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=600&q=80"
+        "https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1584441405886-bc91be61e56a?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?auto=format&fit=crop&w=600&q=80"
     ],
     "Books & Stationery": [
         "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80",
-        "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=600&q=80"
+        "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1611117775350-ac3950990985?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1532012164546-f432f2e3777f?auto=format&fit=crop&w=600&q=80"
     ],
     "Clothing & Bags": [
         "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80",
-        "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80"
+        "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1578768079052-aa76e520028b?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80"
     ],
     "Jewelry & Watches": [
-        "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80"
+        "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80"
     ],
     "Eyewear": [
-        "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80"
+        "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80"
     ],
     "Sports Gear": [
         "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80",
-        "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80"
+        "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&w=600&q=80"
     ],
     "Lab Equipment": [
-        "https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&w=600&q=80"
+        "https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80"
     ]
 };
 
-function getFallbackImage(category?: string, id?: number): string {
+function getFallbackImage(category?: string, id?: number, title?: string): string {
+    const cleanTitle = (title || "").toLowerCase();
+    if (cleanTitle.includes("mouse") || cleanTitle.includes("trackball")) {
+        return "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=600&q=80";
+    }
+    if (cleanTitle.includes("charger") || cleanTitle.includes("adapter") || cleanTitle.includes("dongle") || cleanTitle.includes("power brick")) {
+        return "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80";
+    }
+    if (cleanTitle.includes("headset") || cleanTitle.includes("headphone") || cleanTitle.includes("wh-1000") || cleanTitle.includes("over-ear")) {
+        return "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80";
+    }
+    if (cleanTitle.includes("wallet") || cleanTitle.includes("cardholder") || cleanTitle.includes("bifold") || cleanTitle.includes("purse") || cleanTitle.includes("id card") || cleanTitle.includes("pass")) {
+        return "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80";
+    }
+    if (cleanTitle.includes("key") || cleanTitle.includes("fob") || cleanTitle.includes("badge")) {
+        return "https://images.unsplash.com/photo-1666346166849-8443c47f50fa?auto=format&fit=crop&w=600&q=80";
+    }
+    if (cleanTitle.includes("calculator")) return "https://images.unsplash.com/photo-1611117775350-ac3950990985?auto=format&fit=crop&w=600&q=80";
+    if (cleanTitle.includes("earbud") || cleanTitle.includes("airpod")) return "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80";
+    if (cleanTitle.includes("bottle")) return "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80";
+    if (cleanTitle.includes("pen")) return "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=600&q=80";
+
     const list = FALLBACK_CATEGORY_IMAGES[category || ""] || [
         "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80"
     ];
@@ -150,7 +204,7 @@ const INITIAL_ITEMS = [
         prnNumber: "1032210340",
         division: "Security Desk Counter 2",
         description: "Silver aluminum smartwatch with midnight fabric band found in quiet zone. Turned in for verification.",
-        image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=600&q=80",
         status: "In Safekeeping"
     }
 ];
@@ -436,16 +490,16 @@ export default function LandingContent() {
         .sort((a, b) => b.id - a.id);
 
     return (
-        <div className="relative w-full bg-slate-50 dark:bg-neutral-950 text-neutral-900 dark:text-white font-sans selection:bg-indigo-500/20 transition-colors duration-300">
+        <div className="relative w-full bg-[#FAF7F2] text-[#1F2421] font-sans selection:bg-[#D95D39]/20 transition-colors duration-300">
 
-            {/* Rule 3: Informative Feedback & Rule 6: Easy Reversal (Floating Toast with Undo) */}
+            {/* Floating Toast with Undo */}
             {feedbackToast && (
                 <div
                     role="status"
                     aria-live="polite"
-                    className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[110] flex items-center gap-3 px-4 sm:px-5 py-3 rounded-2xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 shadow-2xl border border-white/10 text-xs sm:text-sm font-medium animate-in slide-in-from-bottom-5 duration-200"
+                    className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[110] flex items-center gap-3 px-4 sm:px-5 py-3 rounded-xl bg-[#1F2421] text-white shadow-tactile-card border border-[#CFC5B4] text-xs sm:text-sm font-medium animate-in slide-in-from-bottom-5 duration-200"
                 >
-                    <div className="h-5 w-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                    <div className="h-5 w-5 rounded-full bg-[#2D5A4C] text-[#E1EFE9] flex items-center justify-center shrink-0">
                         <Check className="h-3.5 w-3.5" />
                     </div>
                     <span>{feedbackToast.message}</span>
@@ -455,7 +509,7 @@ export default function LandingContent() {
                                 feedbackToast.undoAction?.();
                                 setFeedbackToast(null);
                             }}
-                            className="ml-2 flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/15 dark:bg-neutral-900/15 hover:bg-white/25 text-indigo-300 dark:text-indigo-600 font-semibold text-xs transition-colors cursor-pointer"
+                            className="ml-2 flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-semibold text-xs transition-colors cursor-pointer"
                         >
                             <Undo2 className="h-3 w-3" />
                             <span>Undo</span>
@@ -465,36 +519,33 @@ export default function LandingContent() {
             )}
 
             {/* HERO CALL-TO-ACTION SECTION */}
-            <section id="hero" className="relative py-24 sm:py-32 overflow-hidden border-b border-neutral-200 dark:border-white/5">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.15),transparent)] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(99,102,241,0.25),transparent)]" />
+            <section id="hero" className="relative py-24 sm:py-32 overflow-hidden border-b border-[#E3DCD0]">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-wider uppercase bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 mb-6 font-medium">
-                        <Sparkles className="h-3.5 w-3.5" />
+                    <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono tracking-wider uppercase badge-campus mb-6 font-semibold">
+                        <Sparkles className="h-3.5 w-3.5 text-[#7C4A2D]" />
                         Campus Recovery Network
                     </span>
-                    <h2 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight max-w-4xl mx-auto leading-[1.1]">
+                    <h2 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.025em] max-w-4xl mx-auto leading-[1.1] text-[#1F2421]">
                         Lost Something? <br className="hidden sm:inline" />
-                        <span className="bg-gradient-to-r from-indigo-600 via-indigo-500 to-sky-500 bg-clip-text text-transparent">
-                            Find It here.
-                        </span>
+                        <span className="marker-highlight">Find It here.</span>
                     </h2>
-                    <p className="mt-6 text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto font-light leading-relaxed">
+                    <p className="mt-6 text-lg sm:text-xl text-[#5A625E] max-w-2xl mx-auto font-normal leading-relaxed">
                         A smarter, database-backed ecosystem to reconnect students and faculty with lost belongings through automated pattern matching and verified handovers.
                     </p>
 
                     <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
                         <button
                             onClick={() => handleOpenReport("lost")}
-                            className="flex items-center gap-2 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white px-7 py-3.5 text-sm sm:text-base font-semibold shadow-lg shadow-indigo-600/30 transition-all hover:scale-105 cursor-pointer"
+                            className="btn-tactile-primary flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm sm:text-base font-bold cursor-pointer"
                         >
                             <Search className="h-5 w-5" />
                             Report Lost Item
                         </button>
                         <button
                             onClick={() => handleOpenReport("found")}
-                            className="flex items-center gap-2 rounded-2xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-900 dark:text-white px-7 py-3.5 text-sm sm:text-base font-semibold transition-all shadow-sm cursor-pointer"
+                            className="btn-tactile-secondary flex items-center gap-2 rounded-xl px-7 py-3.5 text-sm sm:text-base font-bold cursor-pointer"
                         >
-                            <PlusCircle className="h-5 w-5 text-emerald-500" />
+                            <PlusCircle className="h-5 w-5 text-[#2D5A4C]" />
                             Report Found Item
                         </button>
                     </div>
@@ -502,13 +553,13 @@ export default function LandingContent() {
             </section>
 
             {/* HOW IT WORKS SECTION */}
-            <section id="how-it-works" className="py-24 sm:py-32 border-b border-neutral-200 dark:border-white/5 relative">
+            <section id="how-it-works" className="py-24 sm:py-32 border-b border-[#E3DCD0] relative">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-indigo-600 dark:text-indigo-400 mb-2 font-semibold">
+                        <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-[#D95D39] mb-2 font-semibold">
                             Step-By-Step Workflow
                         </h3>
-                        <p className="text-3xl sm:text-5xl font-bold tracking-tight">
+                        <p className="font-serif text-3xl sm:text-5xl font-bold tracking-[-0.025em] text-[#1F2421]">
                             How It Works
                         </p>
                     </div>
@@ -517,16 +568,16 @@ export default function LandingContent() {
                         {/* Step 1 */}
                         <div
                             onClick={() => handleOpenReport("lost")}
-                            className="group relative rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/60 p-8 shadow-sm hover:border-indigo-500/50 transition-all cursor-pointer"
+                            className="group relative rounded-2xl border border-[#E3DCD0] bg-white p-8 shadow-tactile-card hover:border-[#CFC5B4] transition-all cursor-pointer"
                         >
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-mono text-lg font-bold mb-6">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#EFE6D8] text-[#7C4A2D] border border-[#DFD1BC] font-mono text-lg font-bold mb-6">
                                 01
                             </div>
-                            <h4 className="text-xl font-bold mb-2 flex items-center justify-between">
+                            <h4 className="font-serif text-xl font-bold text-[#1F2421] mb-2 flex items-center justify-between">
                                 <span>1. Report</span>
-                                <span className="text-xs font-mono text-indigo-600 dark:text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity">Submit Report &rarr;</span>
+                                <span className="text-xs font-mono text-[#D95D39] opacity-0 group-hover:opacity-100 transition-opacity">Submit Report &rarr;</span>
                             </h4>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-light">
+                            <p className="text-sm text-[#5A625E] leading-relaxed">
                                 Enter your PRN, Roll Number, Division, item specifications, and upload an image to index the item directly into the database.
                             </p>
                         </div>
@@ -534,16 +585,16 @@ export default function LandingContent() {
                         {/* Step 2 */}
                         <div
                             onClick={() => setMatchModalOpen(true)}
-                            className="group relative rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/60 p-8 shadow-sm hover:border-sky-500/50 hover:shadow-lg transition-all cursor-pointer"
+                            className="group relative rounded-2xl border border-[#E3DCD0] bg-white p-8 shadow-tactile-card hover:border-[#CFC5B4] transition-all cursor-pointer"
                         >
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-600 dark:text-sky-400 font-mono text-lg font-bold mb-6">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#EFE6D8] text-[#7C4A2D] border border-[#DFD1BC] font-mono text-lg font-bold mb-6">
                                 02
                             </div>
-                            <h4 className="text-xl font-bold mb-2 flex items-center justify-between">
+                            <h4 className="font-serif text-xl font-bold text-[#1F2421] mb-2 flex items-center justify-between">
                                 <span>2. Match</span>
-                                <span className="text-xs font-mono text-sky-600 dark:text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity">Open Engine &rarr;</span>
+                                <span className="text-xs font-mono text-[#D95D39] opacity-0 group-hover:opacity-100 transition-opacity">Open Engine &rarr;</span>
                             </h4>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-light">
+                            <p className="text-sm text-[#5A625E] leading-relaxed">
                                 Intelligent SQL fuzzy matching and attribute comparisons correlate newly reported lost and found claims automatically.
                             </p>
                         </div>
@@ -554,16 +605,16 @@ export default function LandingContent() {
                                 setClaimConsoleSelectedId(null);
                                 setClaimManagementModalOpen(true);
                             }}
-                            className="group relative rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/60 p-8 shadow-sm hover:border-emerald-500/50 hover:shadow-lg transition-all cursor-pointer"
+                            className="group relative rounded-2xl border border-[#E3DCD0] bg-white p-8 shadow-tactile-card hover:border-[#CFC5B4] transition-all cursor-pointer"
                         >
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono text-lg font-bold mb-6">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#EFE6D8] text-[#7C4A2D] border border-[#DFD1BC] font-mono text-lg font-bold mb-6">
                                 03
                             </div>
-                            <h4 className="text-xl font-bold mb-2 flex items-center justify-between">
+                            <h4 className="font-serif text-xl font-bold text-[#1F2421] mb-2 flex items-center justify-between">
                                 <span>3. Claim & Pickup</span>
-                                <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity">Track Claims &rarr;</span>
+                                <span className="text-xs font-mono text-[#D95D39] opacity-0 group-hover:opacity-100 transition-opacity">Track Claims &rarr;</span>
                             </h4>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-light">
+                            <p className="text-sm text-[#5A625E] leading-relaxed">
                                 Submit proof details for your item. Once approved by the Admin, pick it up directly from Central Security Counter 2.
                             </p>
                         </div>
@@ -572,14 +623,14 @@ export default function LandingContent() {
             </section>
 
             {/* RECENT LOST & FOUND SECTION */}
-            <section id="recent" className="py-24 sm:py-32 border-b border-neutral-200 dark:border-white/5 relative">
+            <section id="recent" className="py-24 sm:py-32 border-b border-[#E3DCD0] relative">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
                         <div>
-                            <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-indigo-600 dark:text-indigo-400 mb-2 font-semibold">
+                            <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-[#D95D39] mb-2 font-semibold">
                                 Live Database Feed
                             </h3>
-                            <p className="text-3xl sm:text-5xl font-bold tracking-tight">
+                            <p className="font-serif text-3xl sm:text-5xl font-bold tracking-[-0.025em] text-[#1F2421]">
                                 Recent Lost & Found
                             </p>
                         </div>
@@ -587,36 +638,39 @@ export default function LandingContent() {
                         <div className="flex flex-wrap items-center gap-3">
                             {/* Search Input */}
                             <div className="relative">
-                                <Search className="absolute left-3.5 top-3 h-4 w-4 text-neutral-400" />
+                                <Search className="absolute left-3.5 top-3 h-4 w-4 text-[#5A625E]" />
                                 <input
                                     type="text"
                                     placeholder="Search by name, place..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="pl-10 pr-4 py-2 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
+                                    className="editorial-input pl-10 pr-4 py-2 text-sm focus:outline-none"
                                 />
                             </div>
 
                             {/* Filter Tabs */}
-                            <div className="flex items-center gap-1 p-1 rounded-2xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-white/10">
+                            <div className="flex items-center gap-1 p-1 rounded-full bg-[#F2ECE1] border border-[#CFC5B4]">
                                 <button
                                     onClick={() => setActiveFilter("all")}
-                                    className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${activeFilter === "all" ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30" : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
-                                        }`}
+                                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                                        activeFilter === "all" ? "btn-tactile-primary" : "text-[#5A625E] hover:text-[#1F2421]"
+                                    }`}
                                 >
                                     All
                                 </button>
                                 <button
                                     onClick={() => setActiveFilter("lost")}
-                                    className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${activeFilter === "lost" ? "bg-rose-500 text-white shadow-md shadow-rose-500/30" : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
-                                        }`}
+                                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                                        activeFilter === "lost" ? "badge-alert shadow-xs" : "text-[#5A625E] hover:text-[#1F2421]"
+                                    }`}
                                 >
                                     Lost
                                 </button>
                                 <button
                                     onClick={() => setActiveFilter("found")}
-                                    className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${activeFilter === "found" ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/30" : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
-                                        }`}
+                                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                                        activeFilter === "found" ? "badge-verified shadow-xs" : "text-[#5A625E] hover:text-[#1F2421]"
+                                    }`}
                                 >
                                     Found
                                 </button>
@@ -630,7 +684,7 @@ export default function LandingContent() {
                                         setActiveFilter("all");
                                         showToast("Filters reversed: Showing all recent items.");
                                     }}
-                                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-xs font-medium text-neutral-600 dark:text-neutral-300 transition-colors cursor-pointer border border-neutral-200 dark:border-white/10"
+                                    className="btn-tactile-secondary flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer"
                                 >
                                     <Undo2 className="h-3.5 w-3.5" />
                                     <span>Reset Filter</span>
@@ -640,14 +694,14 @@ export default function LandingContent() {
                     </div>
 
                     {filteredItems.length === 0 ? (
-                        <div className="py-16 text-center rounded-3xl border border-dashed border-neutral-300 dark:border-neutral-800">
-                            <p className="text-neutral-500 text-sm">No items matching your search filter.</p>
+                        <div className="py-16 text-center rounded-2xl border border-dashed border-[#CFC5B4] bg-white">
+                            <p className="text-[#5A625E] text-sm">No items matching your search filter.</p>
                             <button
                                 onClick={() => {
                                     setSearchQuery("");
                                     setActiveFilter("all");
                                 }}
-                                className="mt-2 text-xs text-indigo-600 dark:text-indigo-400 underline cursor-pointer"
+                                className="mt-2 text-xs text-[#D95D39] font-semibold underline cursor-pointer"
                             >
                                 Undo search filter
                             </button>
@@ -658,22 +712,24 @@ export default function LandingContent() {
                                 <div
                                     key={`${item.type}-${item.id}`}
                                     onClick={() => handleViewDetails(item)}
-                                    className="group relative rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900/60 overflow-hidden shadow-sm hover:border-neutral-300 dark:hover:border-white/20 transition-all hover:-translate-y-1 cursor-pointer"
+                                    className="group relative rounded-2xl border border-[#E3DCD0] bg-white overflow-hidden shadow-tactile-card hover:border-[#CFC5B4] transition-all hover:-translate-y-0.5 cursor-pointer"
                                 >
-                                    <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-100 dark:bg-neutral-800 relative">
+                                    <div className="aspect-[4/3] w-full overflow-hidden bg-[#F2ECE1] relative">
                                         <img
-                                            src={item.image}
+                                            src={(!item.image || (typeof item.image === "string" && item.image.startsWith("data:") && item.image.length < 250)) 
+                                                ? getFallbackImage(item.category, item.id, item.title) 
+                                                : item.image}
                                             alt={item.title}
                                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                             onError={(e) => {
-                                                e.currentTarget.src = getFallbackImage(item.category, item.id);
+                                                e.currentTarget.src = getFallbackImage(item.category, item.id, item.title);
                                             }}
                                         />
                                         <div className="absolute top-3 left-3 flex flex-wrap items-center gap-1.5 z-10">
-                                            <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider font-semibold ${
+                                            <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider font-semibold shadow-xs ${
                                                 item.type === "lost" 
-                                                    ? "bg-rose-500/90 text-white shadow-sm" 
-                                                    : "bg-emerald-500/90 text-white shadow-sm"
+                                                    ? "badge-alert" 
+                                                    : "badge-verified"
                                             }`}>
                                                 {item.type}
                                             </span>
@@ -690,29 +746,29 @@ export default function LandingContent() {
                                                         handleDeleteItem(item);
                                                     }
                                                 }}
-                                                className="absolute top-3 right-3 p-1.5 rounded-xl bg-black/60 hover:bg-rose-600 text-white shadow-sm transition-all z-10 cursor-pointer"
+                                                className="absolute top-3 right-3 p-1.5 rounded-lg bg-[#1F2421]/80 hover:bg-[#A83C1D] text-white shadow-xs transition-all z-10 cursor-pointer"
                                             >
                                                 <Trash2 className="h-3.5 w-3.5" />
                                             </button>
                                         )}
                                     </div>
                                     <div className="p-5">
-                                        <h6 className="font-bold text-base mb-1 line-clamp-1">{item.title}</h6>
-                                        <div className="space-y-1 text-xs text-neutral-500 mb-4">
+                                        <h6 className="font-serif font-bold text-base text-[#1F2421] mb-1 line-clamp-1">{item.title}</h6>
+                                        <div className="space-y-1 text-xs text-[#5A625E] mb-4">
                                             <div className="flex items-center gap-1.5">
-                                                <MapPin className="h-3.5 w-3.5" />
+                                                <MapPin className="h-3.5 w-3.5 text-[#D95D39]" />
                                                 <span className="truncate">{item.location}</span>
                                             </div>
-                                            <div className="flex items-center gap-1.5">
-                                                <Calendar className="h-3.5 w-3.5" />
+                                            <div className="flex items-center gap-1.5 font-mono">
+                                                <Calendar className="h-3.5 w-3.5 text-[#5A625E]" />
                                                 <span>{item.date}</span>
                                             </div>
                                         </div>
-                                        <div className="pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
-                                            <span className={`text-xs font-mono ${
+                                        <div className="pt-3 border-t border-[#E3DCD0] flex items-center justify-between">
+                                            <span className={`text-xs font-mono font-medium ${
                                                 item.status === "Returned"
-                                                    ? "text-emerald-600 dark:text-emerald-400 font-bold"
-                                                    : "text-indigo-600 dark:text-indigo-400"
+                                                    ? "text-[#225444] font-bold"
+                                                    : "text-[#D95D39]"
                                             }`}>
                                                 {item.status === "Returned" ? "Returned ✓" : item.status}
                                             </span>
@@ -722,7 +778,7 @@ export default function LandingContent() {
                                                     e.stopPropagation();
                                                     handleViewDetails(item);
                                                 }}
-                                                className="text-xs font-semibold text-purple-600 dark:text-purple-400 hover:text-purple-700 flex items-center gap-1 transition-colors cursor-pointer"
+                                                className="text-xs font-bold text-[#D95D39] hover:text-[#C04B29] flex items-center gap-1 transition-colors cursor-pointer"
                                             >
                                                 Details <ArrowRight className="h-3.5 w-3.5" />
                                             </button>
@@ -736,34 +792,34 @@ export default function LandingContent() {
             </section>
 
             {/* ABOUT SECTION */}
-            <section id="about" className="py-24 sm:py-32 border-b border-neutral-200 dark:border-white/5 relative">
+            <section id="about" className="py-24 sm:py-32 border-b border-[#E3DCD0] relative">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-                    <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-indigo-600 dark:text-indigo-400 mb-2 font-semibold">
+                    <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-[#D95D39] mb-2 font-semibold">
                         About The Platform
                     </h3>
-                    <p className="text-3xl sm:text-5xl font-bold tracking-tight mb-8">
+                    <p className="font-serif text-3xl sm:text-5xl font-bold tracking-[-0.025em] text-[#1F2421] mb-8">
                         Reimagining Campus Recovery
                     </p>
-                    <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed font-light">
+                    <p className="text-base sm:text-lg text-[#5A625E] leading-relaxed font-normal">
                         Every semester, hundreds of student belongings—from laptops and keys to student IDs—are misplaced across lecture halls, libraries, and campus grounds. Our platform eliminates static bulletin boards and fragmented group chats by establishing an authoritative, centralized DBMS-powered system where community members effortlessly collaborate to retrieve what matters most.
                     </p>
 
                     {/* Clean & Simple Student Feedback Card */}
-                    <div className="mt-12 p-6 sm:p-7 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm text-left flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div className="mt-12 p-6 sm:p-7 rounded-2xl bg-white border border-[#CFC5B4] shadow-tactile-card text-left flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div className="space-y-1.5 max-w-xl">
                             <div className="flex items-center gap-2">
-                                <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60">
-                                    <Star className="h-3 w-3 fill-amber-500 text-amber-500" />
+                                <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-0.5 rounded-full badge-campus">
+                                    <Star className="h-3 w-3 fill-[#7C4A2D] text-[#7C4A2D]" />
                                     Student Feedback
                                 </span>
-                                <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                                <span className="text-xs font-mono text-[#5A625E]">
                                     • Rated 4.9 / 5 on Campus
                                 </span>
                             </div>
-                            <h4 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white">
+                            <h4 className="font-serif text-lg sm:text-xl font-bold text-[#1F2421]">
                                 Have feedback or recovered an item?
                             </h4>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                            <p className="text-sm text-[#5A625E] leading-relaxed font-sans">
                                 Tell us about your recovery experience or suggest improvements for the campus security counter.
                             </p>
                         </div>
@@ -771,9 +827,9 @@ export default function LandingContent() {
                         <div className="shrink-0">
                             <button
                                 onClick={() => setFeedbackModalOpen(true)}
-                                className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-neutral-950 font-bold text-sm shadow-sm transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                                className="btn-tactile-primary w-full sm:w-auto px-5 py-2.5 rounded-xl text-white font-bold text-sm flex items-center justify-center gap-2 cursor-pointer"
                             >
-                                <Star className="h-4 w-4 fill-neutral-950 text-neutral-950" />
+                                <Star className="h-4 w-4 fill-white text-white" />
                                 <span>Share Feedback</span>
                             </button>
                         </div>
@@ -782,15 +838,15 @@ export default function LandingContent() {
             </section>
 
             {/* FOOTER */}
-            <footer className="py-12 bg-neutral-100 dark:bg-neutral-950 text-neutral-500 text-xs border-t border-neutral-200 dark:border-white/10">
+            <footer className="py-12 bg-[#F2ECE1] text-[#5A625E] text-xs border-t border-[#E3DCD0]">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-2.5 font-mono">
-                        <div className="h-6 w-6 rounded-md overflow-hidden bg-white shadow-xs p-0.5 shrink-0 border border-neutral-200 dark:border-white/10">
+                        <div className="h-6 w-6 rounded-md overflow-hidden bg-white shadow-xs p-0.5 shrink-0 border border-[#CFC5B4]">
                             <img src="/reunite-logo.jpg" alt="ReUnite" className="h-full w-full object-contain" />
                         </div>
                         <span className="font-bold text-sm">
-                            <span className="text-[#0f294a] dark:text-[#93c5fd]">Re</span>
-                            <span className="text-[#ea580c] dark:text-[#fb923c]">Unite</span>
+                            <span className="text-[#1F2421]">Re</span>
+                            <span className="text-[#D95D39]">Unite</span>
                         </span>
                         <span>•</span>
                         <span>Campus Recovery Network</span>
@@ -798,7 +854,7 @@ export default function LandingContent() {
                     <div className="flex flex-wrap items-center gap-4">
                         <button
                             onClick={() => setFeedbackModalOpen(true)}
-                            className="text-neutral-600 dark:text-neutral-400 hover:text-amber-500 dark:hover:text-amber-400 transition-colors flex items-center gap-1.5 font-semibold cursor-pointer"
+                            className="text-[#5A625E] hover:text-[#D95D39] transition-colors flex items-center gap-1.5 font-semibold cursor-pointer"
                         >
                             <span>⭐ Give Feedback</span>
                         </button>

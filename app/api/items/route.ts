@@ -2,55 +2,94 @@ import { NextResponse } from "next/server";
 import { pool } from "@/lib/db";
 
 // Rich curated category images to ensure every single card has a realistic, beautiful image
+// Rich curated category images with distinct, high-resolution campus photos to prevent repetitive cards
 const CATEGORY_IMAGES: Record<string, string[]> = {
   "Laptops & Accessories": [
-    "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600&q=80", // HP Gaming Laptop
+    "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600&q=80", // Gaming Laptop
     "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=600&q=80", // Dell XPS
-    "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80", // MacBook
+    "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80", // MacBook on table
     "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80", // Laptop Charger
+    "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&q=80", // Modern Silver Laptop
+    "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=600&q=80", // MacBook Pro Space Gray
+    "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=600&q=80", // Wireless Mouse
+    "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80", // Mechanical Keyboard
+    "https://images.unsplash.com/photo-1629429408209-1f912961dbd8?auto=format&fit=crop&w=600&q=80", // USB Hub & Dongle
+    "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80", // Tablet & Stylus
   ],
   "Electronics": [
     "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80", // Apple Watch
-    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80", // Headphones
-    "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80", // Phone Charger
-    "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80", // Earbuds
+    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80", // Over-ear Headphones
+    "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80", // Fast Phone Charger
+    "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80", // Wireless Earbuds
+    "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?auto=format&fit=crop&w=600&q=80", // AirPods Case
+    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80", // Smartphone
+    "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=600&q=80", // Portable Power Bank
+    "https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?auto=format&fit=crop&w=600&q=80", // Bluetooth Speaker
+    "https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&w=600&q=80", // Fitness Band
+    "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=600&q=80", // Smartwatch on table
   ],
   "ID Cards & Wallets": [
     "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80", // Leather Wallet
     "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80", // Card holder
     "https://images.unsplash.com/photo-1607344645866-009c320b5ab8?auto=format&fit=crop&w=600&q=80", // Bifold Wallet
+    "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=600&q=80", // Smart College Pass / Badge
+    "https://images.unsplash.com/photo-1614036417651-efe5912149d8?auto=format&fit=crop&w=600&q=80", // Minimalist Card Case
+    "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=600&q=80", // Zip Wallet
+    "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=600&q=80", // Coin & Card Pouch
   ],
   "Keys & Badges": [
     "https://images.unsplash.com/photo-1666346166849-8443c47f50fa?auto=format&fit=crop&w=600&q=80", // Car Key Fob
     "https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=600&q=80", // Keyring
     "https://images.unsplash.com/photo-1584441405886-bc91be61e56a?auto=format&fit=crop&w=600&q=80", // Lanyard Keys
+    "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80", // Motorbike Key
+    "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?auto=format&fit=crop&w=600&q=80", // Metal Keychain
+    "https://images.unsplash.com/photo-1520697830682-bbb6e85e2b0b?auto=format&fit=crop&w=600&q=80", // RFID Access Badge
   ],
   "Books & Stationery": [
     "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80", // Textbook
     "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=600&q=80", // Notebook & pen
-    "https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?auto=format&fit=crop&w=600&q=80", // Stationery
+    "https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?auto=format&fit=crop&w=600&q=80", // Stationery Case
+    "https://images.unsplash.com/photo-1611117775350-ac3950990985?auto=format&fit=crop&w=600&q=80", // Scientific Calculator
+    "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=600&q=80", // Parker Fountain Pen
+    "https://images.unsplash.com/photo-1532012164546-f432f2e3777f?auto=format&fit=crop&w=600&q=80", // Hardcover Book
+    "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=600&q=80", // Spiral Journal
   ],
   "Clothing & Bags": [
-    "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80", // Backpack
-    "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80", // Jacket
-    "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80", // Tote bag
+    "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80", // Black Backpack
+    "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80", // Winter Jacket
+    "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80", // Canvas Tote bag
+    "https://images.unsplash.com/photo-1578768079052-aa76e520028b?auto=format&fit=crop&w=600&q=80", // Campus Hoodie
+    "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80", // Cap
+    "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80", // Shoulder Crossbody Bag
+    "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80", // Umbrella
   ],
   "Jewelry & Watches": [
-    "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80", // Watch
-    "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", // Ring
+    "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80", // Analog Watch
+    "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", // Silver Ring
+    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", // Gold Chain
+    "https://images.unsplash.com/photo-1611591475819-79b8b4a7c931?auto=format&fit=crop&w=600&q=80", // Bracelet
+    "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80", // Earrings
   ],
   "Eyewear": [
-    "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80", // Sunglasses
+    "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80", // Ray-Ban Sunglasses
     "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&q=80", // Reading Glasses
+    "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=600&q=80", // Wireframe Glasses
+    "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80", // Dark Sunglasses
+    "https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=600&q=80", // Glasses Case
   ],
   "Sports Gear": [
-    "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80", // Gym bottle
+    "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80", // Gym Water Bottle
     "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80", // Basketball
-    "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=600&q=80", // Badminton racket
+    "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=600&q=80", // Badminton Racket
+    "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&w=600&q=80", // Football
+    "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=600&q=80", // Running Shoes
   ],
   "Lab Equipment": [
     "https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&w=600&q=80", // Microscope
-    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80", // Multimeter/breadboard
+    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80", // Multimeter & Circuit
+    "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80", // Beaker
+    "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=600&q=80", // Engineering Tool
+    "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80", // Circuit Board
   ]
 };
 
@@ -131,32 +170,160 @@ const SEED_ITEMS = [
     prnNumber: "1032210340",
     division: "Security Desk Counter 2",
     description: "Silver aluminum smartwatch with midnight fabric band found in quiet zone. Turned in for verification.",
-    image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=600&q=80",
     status: "In Safekeeping"
   }
 ];
 
-// Helper to convert binary BLOB from MySQL or provide fallback category image
-function formatBlobImage(blob: any, mime: string | null, type: string, id: number, category: string, title?: string): string {
+// Anti-repetition image allocator: ensures every image appears at most 1 or 2 times across the feed
+function formatBlobImage(
+  blob: any, 
+  mime: string | null, 
+  type: string, 
+  id: number, 
+  category: string, 
+  title?: string,
+  usageTracker?: Map<string, number>
+): string {
   if (blob) {
-    if (Buffer.isBuffer(blob)) {
-      const header = blob.toString("utf8", 0, 10);
-      if (header.startsWith("http://") || header.startsWith("https://")) {
-        return blob.toString("utf8");
+    if (typeof blob === "string") {
+      if (blob.startsWith("http://") || blob.startsWith("https://")) {
+        return blob;
       }
-      // If it's a real user-uploaded photo (larger than 150 bytes, not the 1x1 67-byte dummy transparent PNG)
-      if (blob.length > 150) {
-        return `data:${mime || "image/jpeg"};base64,${blob.toString("base64")}`;
+      if (blob.startsWith("data:") && blob.length > 250) {
+        return blob;
       }
+    } else if (Buffer.isBuffer(blob) || (typeof blob === "object" && blob !== null)) {
+      try {
+        const buf = Buffer.from(blob);
+        const header = buf.toString("utf8", 0, 10);
+        if (header.startsWith("http://") || header.startsWith("https://")) {
+          return buf.toString("utf8");
+        }
+        // Only use user base64 if it is a real image > 250 bytes (not the 67-byte dummy 1x1 transparent PNG)
+        if (buf.length > 250) {
+          return `data:${mime || "image/jpeg"};base64,${buf.toString("base64")}`;
+        }
+      } catch {}
     }
   }
 
-  // Guaranteed category-based high-quality photo
-  const list = CATEGORY_IMAGES[category] || [
-    "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80"
-  ];
-  const idx = Math.abs(id) % list.length;
-  return list[idx];
+  const cleanTitle = (title || "").toLowerCase();
+  let candidates: string[] = [];
+
+  // Match specific item keywords to pick an accurate photo
+  if (cleanTitle.includes("mouse") || cleanTitle.includes("trackball")) {
+    candidates = [
+      "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1605792657660-596af9009e82?auto=format&fit=crop&w=600&q=80"
+    ];
+  } else if (cleanTitle.includes("charger") || cleanTitle.includes("adapter") || cleanTitle.includes("power brick") || cleanTitle.includes("dongle") || cleanTitle.includes("magsafe")) {
+    candidates = [
+      "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1629429408209-1f912961dbd8?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&w=600&q=80"
+    ];
+  } else if (cleanTitle.includes("headset") || cleanTitle.includes("headphone") || cleanTitle.includes("wh-1000") || cleanTitle.includes("over-ear")) {
+    candidates = [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=600&q=80"
+    ];
+  } else if (cleanTitle.includes("earbud") || cleanTitle.includes("airpod")) {
+    candidates = [
+      "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?auto=format&fit=crop&w=600&q=80"
+    ];
+  } else if (cleanTitle.includes("calculator")) {
+    candidates = ["https://images.unsplash.com/photo-1611117775350-ac3950990985?auto=format&fit=crop&w=600&q=80"];
+  } else if (cleanTitle.includes("watch")) {
+    candidates = [
+      "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&w=600&q=80"
+    ];
+  } else if (cleanTitle.includes("wallet") || cleanTitle.includes("bifold") || cleanTitle.includes("cardholder") || cleanTitle.includes("purse") || cleanTitle.includes("id card") || cleanTitle.includes("pass")) {
+    candidates = [
+      "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1607344645866-009c320b5ab8?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=600&q=80"
+    ];
+  } else if (cleanTitle.includes("key") || cleanTitle.includes("fob") || cleanTitle.includes("badge")) {
+    candidates = [
+      "https://images.unsplash.com/photo-1666346166849-8443c47f50fa?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1584441405886-bc91be61e56a?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?auto=format&fit=crop&w=600&q=80"
+    ];
+  } else if (cleanTitle.includes("pen") || cleanTitle.includes("parker")) {
+    candidates = ["https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=600&q=80"];
+  } else if (cleanTitle.includes("sunglass") || cleanTitle.includes("glasses") || cleanTitle.includes("wayfarer")) {
+    candidates = [
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=600&q=80"
+    ];
+  } else if (cleanTitle.includes("laptop") || cleanTitle.includes("victus") || cleanTitle.includes("xps") || cleanTitle.includes("macbook")) {
+    candidates = [
+      "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=600&q=80"
+    ];
+  } else if (cleanTitle.includes("textbook") || cleanTitle.includes("book") || cleanTitle.includes("notebook")) {
+    candidates = [
+      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1532012164546-f432f2e3777f?auto=format&fit=crop&w=600&q=80"
+    ];
+  } else if (cleanTitle.includes("bottle")) {
+    candidates = ["https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80"];
+  } else if (cleanTitle.includes("racket") || cleanTitle.includes("badminton")) {
+    candidates = ["https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=600&q=80"];
+  }
+
+  // Fallback to Category list if no keyword match
+  if (!candidates.length) {
+    candidates = CATEGORY_IMAGES[category] || [
+      "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80"
+    ];
+  }
+
+  // If no tracker provided, simple mod
+  if (!usageTracker) {
+    const idx = Math.abs(id) % candidates.length;
+    return candidates[idx];
+  }
+
+  // Find candidate that appeared fewer than 2 times
+  let bestImg = candidates[0];
+  let minUsage = Infinity;
+  const offset = Math.abs(id || 0) % candidates.length;
+  for (let i = 0; i < candidates.length; i++) {
+    const candidate = candidates[(offset + i) % candidates.length];
+    const count = usageTracker.get(candidate) || 0;
+    if (count < 2) {
+      bestImg = candidate;
+      minUsage = count;
+      break;
+    }
+    if (count < minUsage) {
+      minUsage = count;
+      bestImg = candidate;
+    }
+  }
+
+  usageTracker.set(bestImg, (usageTracker.get(bestImg) || 0) + 1);
+  return bestImg;
 }
 
 export async function GET() {
@@ -169,7 +336,18 @@ export async function GET() {
           'lost' as type,
           l.title,
           l.category,
-          COALESCE(loc.building_name, 'Campus') as location,
+          loc.location_id,
+          COALESCE(
+            CONCAT(
+              loc.building_name, 
+              IF(loc.floor_room IS NOT NULL AND loc.floor_room != '' AND loc.floor_room != 'General Area', CONCAT(' (', loc.floor_room, ')'), '')
+            ),
+            loc.building_name, 
+            'Campus'
+          ) as location,
+          loc.building_name,
+          loc.floor_room,
+          loc.campus_zone,
           DATE_FORMAT(l.date_lost, '%Y-%m-%d') as date,
           COALESCE(u.prn_number, '1032210084') as prnNumber,
           COALESCE(u.department, 'Student Division') as division,
@@ -191,7 +369,18 @@ export async function GET() {
           'found' as type,
           f.title,
           f.category,
-          COALESCE(loc.building_name, 'Campus') as location,
+          loc.location_id,
+          COALESCE(
+            CONCAT(
+              loc.building_name, 
+              IF(loc.floor_room IS NOT NULL AND loc.floor_room != '' AND loc.floor_room != 'General Area', CONCAT(' (', loc.floor_room, ')'), '')
+            ),
+            loc.building_name, 
+            'Campus'
+          ) as location,
+          loc.building_name,
+          loc.floor_room,
+          loc.campus_zone,
           DATE_FORMAT(f.date_found, '%Y-%m-%d') as date,
           COALESCE(u.prn_number, '1032210412') as prnNumber,
           COALESCE(u.department, 'Safekeeping Counter') as division,
@@ -206,15 +395,17 @@ export async function GET() {
         ORDER BY f.created_at DESC
       `);
 
+      const usageTracker = new Map<string, number>();
+
       const formattedLost = (lostRows || []).map((row: any) => ({
         ...row,
-        image: formatBlobImage(row.image_data, row.image_mime, "lost", row.id, row.category, row.title),
+        image: formatBlobImage(row.image_data, row.image_mime, "lost", row.id, row.category, row.title, usageTracker),
         image_data: undefined // strip raw buffer from JSON payload
       }));
 
       const formattedFound = (foundRows || []).map((row: any) => ({
         ...row,
-        image: formatBlobImage(row.image_data, row.image_mime, "found", row.id, row.category, row.title),
+        image: formatBlobImage(row.image_data, row.image_mime, "found", row.id, row.category, row.title, usageTracker),
         image_data: undefined
       }));
 
@@ -243,6 +434,8 @@ export async function POST(request: Request) {
       itemTitle, 
       category, 
       location: locName, 
+      locationId: directLocationId,
+      location_id: directLocId,
       description, 
       image,
       contactEmail,
@@ -276,21 +469,60 @@ export async function POST(request: Request) {
     }
 
     try {
-      // 1. Resolve or create Location
+      // 1. Resolve or create Location with strict relational foreign key integrity
       let locationId = 1;
-      if (locName && locName.trim()) {
-        const [locs]: any = await pool.execute(
-          "SELECT location_id FROM location WHERE building_name LIKE ? LIMIT 1",
-          [`%${locName.trim()}%`]
+      const explicitLocId = directLocationId || directLocId;
+
+      if (explicitLocId && !isNaN(Number(explicitLocId))) {
+        const [locCheck]: any = await pool.execute(
+          "SELECT location_id FROM location WHERE location_id = ? LIMIT 1",
+          [Number(explicitLocId)]
         );
-        if (locs && locs.length > 0) {
-          locationId = locs[0].location_id;
+        if (locCheck && locCheck.length > 0) {
+          locationId = locCheck[0].location_id;
+        }
+      } else if (locName && typeof locName === "string" && locName.trim()) {
+        const cleanLoc = locName.trim();
+        // Check exact match by building_name or formatted display
+        const [exactMatch]: any = await pool.execute(
+          `SELECT location_id FROM location 
+           WHERE building_name = ? 
+              OR CONCAT(building_name, ' - ', floor_room) = ? 
+              OR CONCAT(building_name, ' (', floor_room, ')') = ? 
+           LIMIT 1`,
+          [cleanLoc, cleanLoc, cleanLoc]
+        );
+
+        if (exactMatch && exactMatch.length > 0) {
+          locationId = exactMatch[0].location_id;
         } else {
-          const [newLoc]: any = await pool.execute(
-            "INSERT INTO location (building_name, floor_room, campus_zone) VALUES (?, ?, ?)",
-            [locName.trim(), "General Area", "Main Campus"]
+          // Check partial match in building, floor or description
+          const [partialMatch]: any = await pool.execute(
+            "SELECT location_id FROM location WHERE building_name LIKE ? OR floor_room LIKE ? OR description LIKE ? LIMIT 1",
+            [`%${cleanLoc}%`, `%${cleanLoc}%`, `%${cleanLoc}%`]
           );
-          locationId = newLoc.insertId;
+          if (partialMatch && partialMatch.length > 0) {
+            locationId = partialMatch[0].location_id;
+          } else {
+            // New location entered: insert a structured row into the location table
+            let building = cleanLoc;
+            let floorRoom = "General Area";
+            if (cleanLoc.includes("-")) {
+              const parts = cleanLoc.split("-").map((p: string) => p.trim());
+              building = parts[0];
+              floorRoom = parts.slice(1).join(" - ");
+            } else if (cleanLoc.includes(",")) {
+              const parts = cleanLoc.split(",").map((p: string) => p.trim());
+              building = parts[0];
+              floorRoom = parts.slice(1).join(", ");
+            }
+
+            const [newLoc]: any = await pool.execute(
+              "INSERT INTO location (building_name, floor_room, campus_zone, description) VALUES (?, ?, 'Main Campus', ?)",
+              [building, floorRoom, `Campus report location for ${itemTitle}`]
+            );
+            locationId = newLoc.insertId;
+          }
         }
       }
 

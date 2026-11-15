@@ -205,24 +205,24 @@ export default function MatchModal({
 
   return (
     <div 
-      className="fixed inset-0 z-[100] overflow-y-auto p-3 sm:p-6 flex items-start sm:items-center justify-center bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] overflow-y-auto p-3 sm:p-6 flex items-start sm:items-center justify-center editorial-modal-backdrop animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div 
-        className="relative w-full max-w-6xl my-auto rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-2xl flex flex-col text-neutral-900 dark:text-white max-h-[92vh] overflow-hidden"
+        className="relative w-full max-w-6xl my-auto rounded-[18px] editorial-modal-container flex flex-col text-[#1F2421] max-h-[92vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header - Spacious, clear, and cleanly separated */}
-        <div className="px-6 sm:px-8 py-5 border-b border-neutral-200 dark:border-white/10 flex items-center justify-between bg-white dark:bg-neutral-900 sticky top-0 z-20">
+        {/* Header */}
+        <div className="px-6 sm:px-8 py-5 border-b border-[#E3DCD0] flex items-center justify-between bg-[#FAF7F2] sticky top-0 z-20">
           <div className="flex items-center gap-3.5">
-            <div className="h-11 w-11 rounded-2xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold shadow-sm">
-              <Sparkles className="h-6 w-6" />
+            <div className="h-11 w-11 rounded-xl bg-[#EFE6D8] text-[#7C4A2D] border border-[#DFD1BC] flex items-center justify-center font-bold shadow-xs">
+              <Sparkles className="h-6 w-6 text-[#7C4A2D]" />
             </div>
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
+              <h2 className="font-serif text-xl sm:text-2xl font-bold tracking-[-0.025em] text-[#1F2421]">
                 AI Match for Your Reported Lost Items
               </h2>
-              <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
+              <p className="text-xs sm:text-sm text-[#5A625E] mt-0.5 font-sans">
                 Automatically matches your reported lost belongings with found inventory using AI similarity scores.
               </p>
             </div>
@@ -230,7 +230,7 @@ export default function MatchModal({
           <button
             onClick={onClose}
             aria-label="Close dialog"
-            className="p-2.5 rounded-xl text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-white/5 transition-all cursor-pointer"
+            className="p-2.5 rounded-xl text-[#5A625E] hover:text-[#1F2421] hover:bg-[#F2ECE1] transition-all cursor-pointer"
           >
             <X className="h-6 w-6" />
           </button>
@@ -244,34 +244,34 @@ export default function MatchModal({
             <div className="md:col-span-5 space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white">
+                  <h3 className="font-serif text-base sm:text-lg font-bold text-[#1F2421]">
                     Your Reported Lost Items
                   </h3>
-                  <p className="text-xs text-neutral-500">
+                  <p className="text-xs text-[#5A625E]">
                     Select an item to view its AI recommendations
                   </p>
                 </div>
-                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">
+                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-full badge-campus">
                   {manuallyReportedLost.length} Reported
                 </span>
               </div>
 
               {manuallyReportedLost.length === 0 ? (
                 /* Empty state when user hasn't reported an item yet */
-                <div className="p-8 text-center rounded-2xl border-2 border-dashed border-neutral-300 dark:border-neutral-700 bg-neutral-50/50 dark:bg-neutral-800/30 flex flex-col items-center justify-center">
-                  <div className="h-14 w-14 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3">
+                <div className="p-8 text-center rounded-2xl border-2 border-dashed border-[#CFC5B4] bg-white flex flex-col items-center justify-center">
+                  <div className="h-14 w-14 rounded-2xl bg-[#EFE6D8] text-[#7C4A2D] flex items-center justify-center mb-3">
                     <PlusCircle className="h-7 w-7" />
                   </div>
-                  <h4 className="text-base font-bold mb-1 text-neutral-900 dark:text-white">
+                  <h4 className="font-serif text-base font-bold mb-1 text-[#1F2421]">
                     No Lost Items Reported Yet
                   </h4>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-4 max-w-xs">
+                  <p className="text-xs text-[#5A625E] mb-4 max-w-xs">
                     Report a lost item to automatically see instant AI recommendations against all found campus items.
                   </p>
                   <button
                     type="button"
                     onClick={onOpenReport}
-                    className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold shadow-md shadow-indigo-600/30 transition-all cursor-pointer flex items-center gap-1.5"
+                    className="btn-tactile-primary px-5 py-2.5 rounded-xl text-white text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-1.5"
                   >
                     <PlusCircle className="h-4 w-4" />
                     <span>Report a Lost Item Now</span>
@@ -286,13 +286,13 @@ export default function MatchModal({
                       <div
                         key={`my-lost-${item.id}`}
                         onClick={() => setSelectedLostId(item.id)}
-                        className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center gap-4 ${
+                        className={`p-4 rounded-xl border transition-all cursor-pointer flex items-center gap-4 bg-white ${
                           isSelected
-                            ? "border-sky-600 dark:border-sky-500 bg-sky-50/80 dark:bg-sky-950/40 shadow-md ring-2 ring-sky-500/40"
-                            : "border-neutral-200 dark:border-white/10 hover:border-neutral-300 dark:hover:border-white/20 bg-neutral-50/50 dark:bg-neutral-800/40 hover:-translate-y-0.5"
+                            ? "border-[#D95D39] shadow-tactile-card ring-2 ring-[#D95D39]/30"
+                            : "border-[#E3DCD0] shadow-tactile-card hover:border-[#CFC5B4]"
                         }`}
                       >
-                        <div className="h-20 w-20 sm:h-22 sm:w-22 rounded-2xl overflow-hidden bg-neutral-200 dark:bg-neutral-800 shrink-0 shadow-sm">
+                        <div className="h-20 w-20 sm:h-22 sm:w-22 rounded-xl overflow-hidden bg-[#F2ECE1] border border-[#CFC5B4] shrink-0">
                           <img 
                             src={item.image} 
                             alt={item.title} 
@@ -304,18 +304,18 @@ export default function MatchModal({
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-1 mb-1">
-                            <span className="text-xs font-mono font-bold text-rose-500 uppercase tracking-wider">
+                            <span className="text-xs font-mono font-bold badge-alert px-2 py-0.5 rounded-md uppercase tracking-wider">
                               {item.category}
                             </span>
                             {isSelected && (
-                              <CheckCircle2 className="h-5 w-5 text-sky-600 dark:text-sky-400 shrink-0" />
+                              <CheckCircle2 className="h-5 w-5 text-[#D95D39] shrink-0" />
                             )}
                           </div>
-                          <h4 className="font-bold text-base text-neutral-900 dark:text-white truncate">
+                          <h4 className="font-serif font-bold text-base text-[#1F2421] truncate">
                             {item.title}
                           </h4>
-                          <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate flex items-center gap-1 mt-1">
-                            <MapPin className="h-3.5 w-3.5 shrink-0 text-neutral-400" />
+                          <p className="text-xs text-[#5A625E] truncate flex items-center gap-1 mt-1">
+                            <MapPin className="h-3.5 w-3.5 shrink-0 text-[#D95D39]" />
                             <span>{item.location}</span>
                           </p>
                         </div>
@@ -326,57 +326,52 @@ export default function MatchModal({
               )}
             </div>
 
-            {/* Right Column: AI Recommended Matches with Large Images & Fonts */}
+            {/* Right Column: AI Recommended Matches */}
             <div className="md:col-span-7 flex flex-col space-y-4">
-              <div className="flex items-center justify-between pb-2 border-b border-neutral-200 dark:border-white/10">
+              <div className="flex items-center justify-between pb-2 border-b border-[#E3DCD0]">
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-sky-500" />
+                  <h3 className="font-serif text-base sm:text-lg font-bold text-[#1F2421] flex items-center gap-2">
+                    <Sparkles className="h-5 w-5 text-[#D95D39]" />
                     <span>AI Recommended Matches</span>
                   </h3>
                   {activeLostItem && (
-                    <p className="text-xs text-neutral-500">
-                      Matched for: <strong className="text-neutral-800 dark:text-white">&ldquo;{activeLostItem.title}&rdquo;</strong>
+                    <p className="text-xs text-[#5A625E]">
+                      Matched for: <strong className="text-[#1F2421]">&ldquo;{activeLostItem.title}&rdquo;</strong>
                     </p>
                   )}
                 </div>
                 {activeLostItem && (
-                  <span className="text-xs font-mono font-medium text-neutral-400">
+                  <span className="text-xs font-mono font-medium text-[#5A625E]">
                     {rankedMatches.length} Found Items Evaluated
                   </span>
                 )}
               </div>
 
               {!activeLostItem ? (
-                <div className="p-12 text-center rounded-2xl border-2 border-dashed border-neutral-200 dark:border-white/10 bg-neutral-50/50 dark:bg-neutral-800/20 text-neutral-500">
+                <div className="p-12 text-center rounded-2xl border-2 border-dashed border-[#CFC5B4] bg-white text-[#5A625E]">
                   <p className="text-sm">Select one of your reported lost items on the left to see recommendations.</p>
                 </div>
               ) : (
                 <div className="space-y-4 max-h-[500px] overflow-y-auto pr-1.5">
                   {rankedMatches.map(({ found, score }) => {
                     const isTopMatch = score >= 85;
-                    const isGoodMatch = score >= 60;
 
                     return (
                       <div
                         key={`match-rec-${found.id}`}
-                        className={`p-5 rounded-2xl border transition-all space-y-4 ${
-                          isTopMatch
-                            ? "border-emerald-500/50 bg-emerald-500/[0.05] dark:bg-emerald-500/[0.09] shadow-md ring-1 ring-emerald-500/20"
-                            : "border-neutral-200 dark:border-white/10 bg-neutral-50/50 dark:bg-neutral-800/40 hover:border-sky-500/40"
-                        }`}
+                        className="p-5 rounded-2xl border border-[#E3DCD0] bg-white shadow-tactile-card space-y-4"
                       >
                         {/* Top banner if strong match */}
                         {isTopMatch && (
-                          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-mono font-bold">
-                            <Sparkles className="h-4 w-4 text-emerald-500" />
+                          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg badge-verified text-xs font-mono font-bold">
+                            <Sparkles className="h-4 w-4 text-[#225444]" />
                             <span>TOP RECOMMENDED MATCH ({score}% CONFIDENCE)</span>
                           </div>
                         )}
 
                         {/* Large Image & Clear Typography */}
                         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                          <div className="h-28 w-28 sm:h-32 sm:w-32 rounded-2xl overflow-hidden bg-neutral-200 dark:bg-neutral-800 shrink-0 shadow-sm border border-neutral-200/60 dark:border-white/10">
+                          <div className="h-28 w-28 sm:h-32 sm:w-32 rounded-xl overflow-hidden bg-[#F2ECE1] shrink-0 border border-[#CFC5B4]">
                             <img 
                               src={found.image} 
                               alt={found.title} 
@@ -389,49 +384,43 @@ export default function MatchModal({
 
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between gap-2 mb-1.5">
-                              <span className="text-xs font-mono uppercase font-bold text-neutral-500">
+                              <span className="text-xs font-mono uppercase font-bold text-[#5A625E]">
                                 Found Record #{found.id}
                               </span>
                               <span className={`px-3 py-1 rounded-full text-xs sm:text-sm font-mono font-bold ${
                                 isTopMatch
-                                  ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
-                                  : isGoodMatch
-                                  ? "bg-sky-500/15 text-sky-700 dark:text-sky-300 border border-sky-500/25"
-                                  : "bg-neutral-200 text-neutral-600 dark:text-neutral-400"
+                                  ? "badge-verified"
+                                  : "badge-campus"
                               }`}>
                                 {score}% AI Match
                               </span>
                             </div>
 
-                            <h4 className="font-bold text-base sm:text-lg text-neutral-900 dark:text-white leading-snug">
+                            <h4 className="font-serif font-bold text-base sm:text-lg text-[#1F2421] leading-snug">
                               {found.title}
                             </h4>
 
-                            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed mt-1 line-clamp-2">
+                            <p className="text-xs sm:text-sm text-[#5A625E] leading-relaxed mt-1 line-clamp-2">
                               {found.description}
                             </p>
                             
-                            <div className="mt-2.5 flex flex-wrap items-center gap-3 text-xs text-neutral-500">
-                              <span className="flex items-center gap-1 font-medium text-neutral-700 dark:text-neutral-300">
-                                <MapPin className="h-3.5 w-3.5 text-indigo-500" />
+                            <div className="mt-2.5 flex flex-wrap items-center gap-3 text-xs text-[#5A625E]">
+                              <span className="flex items-center gap-1 font-medium text-[#1F2421]">
+                                <MapPin className="h-3.5 w-3.5 text-[#D95D39]" />
                                 <span>{found.location}</span>
                               </span>
                               <span>•</span>
-                              <span className="font-mono bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded-md">
+                              <span className="font-mono badge-campus px-2 py-0.5 rounded-md">
                                 {found.category}
                               </span>
                             </div>
                           </div>
                         </div>
 
-                        {/* Prominent Action Button */}
+                        {/* Action Button */}
                         <button
                           onClick={() => onSelectPair?.(activeLostItem, found)}
-                          className={`w-full py-3 px-6 rounded-xl text-white text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md ${
-                            isTopMatch
-                              ? "bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/30"
-                              : "bg-sky-600 hover:bg-sky-500 shadow-sky-600/20"
-                          }`}
+                          className="btn-tactile-primary w-full py-3 px-6 rounded-xl text-white text-sm font-bold flex items-center justify-center gap-2 cursor-pointer"
                         >
                           <Check className="h-4 w-4" />
                           <span>This is my item! Verify & Retrieve →</span>

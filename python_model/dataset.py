@@ -131,6 +131,38 @@ ITEMS_DATABASE = [
         "location": "Library 2nd Floor",
         "description": "Found on study desk 14. Black HP Victus 15 gaming laptop with blue backlit keyboard and desktop wallpaper.",
         "type": "found"
+    },
+    {
+        "id": 13,
+        "title": "Sony WH-1000XM4 Over-Ear Bluetooth Headset",
+        "category": "Electronics",
+        "location": "Library 2nd Floor",
+        "description": "Black noise cancelling audio headset with plush earcups and padded headband left in cubicle.",
+        "type": "lost"
+    },
+    {
+        "id": 14,
+        "title": "Sony WH-1000XM4 Wireless Noise Cancelling Headset (Black)",
+        "category": "Electronics",
+        "location": "Library 2nd Floor",
+        "description": "Black over-ear Bluetooth headphones with cushioned leather earcups found on reading desk.",
+        "type": "found"
+    },
+    {
+        "id": 15,
+        "title": "Logitech MX Master 3S Ergonomic Mouse",
+        "category": "Laptops & Accessories",
+        "location": "Computer Center Lab 3",
+        "description": "Graphite dark gray wireless mouse with thumb wheel and quiet click buttons.",
+        "type": "lost"
+    },
+    {
+        "id": 16,
+        "title": "Logitech MX Master 3S Wireless Performance Mouse (Graphite)",
+        "category": "Laptops & Accessories",
+        "location": "Computer Center Lab 3",
+        "description": "Ergonomic Bluetooth optical mouse with MagSpeed electromagnetic scroll wheel found at terminal 18.",
+        "type": "found"
     }
 ]
 
@@ -155,8 +187,8 @@ class MultimodalLostFoundDataset(Dataset):
         super().__init__()
         self.samples = []
         
-        # Build match pairs
-        match_pairs = [(1, 2), (3, 4), (5, 6), (7, 8), (9, 10)]
+        # Build match pairs: Watches, Wallets, Chargers, Keys, Books, Laptops, Headsets, Mice
+        match_pairs = [(1, 2), (3, 4), (5, 6), (7, 8), (9, 10), (11, 12), (13, 14), (15, 16)]
         
         for _ in range(num_samples // 2):
             # Positive pairs

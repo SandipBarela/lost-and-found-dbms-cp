@@ -58,48 +58,48 @@ export default function ItemDetailModal({
 
   return (
     <div 
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 editorial-modal-backdrop animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div 
-        className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-2xl p-6 sm:p-8 text-neutral-900 dark:text-white"
+        className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto editorial-modal-container p-6 sm:p-8 text-[#1F2421]"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-xl text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-white/5 transition-all cursor-pointer"
+          className="absolute top-6 right-6 p-2 rounded-xl text-[#5A625E] hover:text-[#1F2421] hover:bg-[#F2ECE1] transition-all cursor-pointer"
         >
           <X className="h-5 w-5" />
         </button>
 
         <div className="flex items-center gap-2 mb-4">
-          <span className={`px-2.5 py-1 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold ${
+          <span className={`px-2.5 py-1 rounded-full text-xs font-mono uppercase tracking-wider font-semibold ${
             isLost 
-              ? "bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20" 
-              : "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+              ? "badge-alert" 
+              : "badge-verified"
           }`}>
             {item.type}
           </span>
-          <span className="text-xs font-mono text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-lg">
+          <span className="text-xs font-semibold badge-campus px-2.5 py-1 rounded-full">
             {item.category || "General"}
           </span>
-          <span className={`text-xs font-mono px-2.5 py-1 rounded-lg ${
+          <span className={`text-xs font-mono px-2.5 py-1 rounded-full ${
             item.status === "Returned"
-              ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-bold border border-emerald-500/20"
-              : "text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800"
+              ? "badge-verified font-bold"
+              : "badge-campus"
           }`}>
             {item.status === "Returned" ? "Returned ✓" : (item.status || "In Safekeeping")}
           </span>
           {isOwner && (
-            <span className="text-[11px] font-mono text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md font-semibold">
+            <span className="text-[11px] font-mono badge-alert px-2.5 py-0.5 rounded-full font-semibold">
               Your Report
             </span>
           )}
         </div>
 
-        <h2 className="text-2xl font-bold tracking-tight mb-4">{item.title}</h2>
+        <h2 className="font-serif text-2xl font-bold tracking-[-0.025em] text-[#1F2421] mb-4">{item.title}</h2>
 
-        <div className="aspect-video w-full rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-800 mb-6 relative">
+        <div className="aspect-video w-full rounded-xl overflow-hidden bg-[#F2ECE1] border border-[#CFC5B4] mb-6 relative">
           <img 
             src={item.image} 
             alt={item.title} 
@@ -110,40 +110,40 @@ export default function ItemDetailModal({
           />
         </div>
 
-        <div className="space-y-4 text-sm text-neutral-600 dark:text-neutral-300">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200/60 dark:border-white/5">
+        <div className="space-y-4 text-sm text-[#5A625E]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-xl bg-white border border-[#E3DCD0] shadow-tactile-card">
             <div className="flex items-center gap-2.5">
-              <MapPin className="h-4 w-4 text-indigo-500 shrink-0" />
+              <MapPin className="h-4 w-4 text-[#D95D39] shrink-0" />
               <div>
-                <p className="text-[11px] text-neutral-400 uppercase font-mono">Location</p>
-                <p className="font-medium text-xs sm:text-sm text-neutral-800 dark:text-white">{item.location}</p>
+                <p className="text-[11px] text-[#5A625E] uppercase font-mono">Location</p>
+                <p className="font-medium text-xs sm:text-sm text-[#1F2421]">{item.location}</p>
               </div>
             </div>
 
             <div className="flex items-center gap-2.5">
-              <Calendar className="h-4 w-4 text-indigo-500 shrink-0" />
+              <Calendar className="h-4 w-4 text-[#D95D39] shrink-0" />
               <div>
-                <p className="text-[11px] text-neutral-400 uppercase font-mono">Reported Date</p>
-                <p className="font-medium text-xs sm:text-sm text-neutral-800 dark:text-white">{item.date}</p>
+                <p className="text-[11px] text-[#5A625E] uppercase font-mono">Reported Date</p>
+                <p className="font-medium text-xs sm:text-sm text-[#1F2421] font-mono">{item.date}</p>
               </div>
             </div>
 
             {item.prnNumber && (
               <div className="flex items-center gap-2.5">
-                <Hash className="h-4 w-4 text-indigo-500 shrink-0" />
+                <Hash className="h-4 w-4 text-[#2D5A4C] shrink-0" />
                 <div>
-                  <p className="text-[11px] text-neutral-400 uppercase font-mono">Student PRN</p>
-                  <p className="font-mono text-xs sm:text-sm text-neutral-800 dark:text-white">{item.prnNumber}</p>
+                  <p className="text-[11px] text-[#5A625E] uppercase font-mono">Student PRN</p>
+                  <p className="font-mono text-xs sm:text-sm text-[#1F2421]">{item.prnNumber}</p>
                 </div>
               </div>
             )}
 
             {item.division && (
               <div className="flex items-center gap-2.5">
-                <School className="h-4 w-4 text-indigo-500 shrink-0" />
+                <School className="h-4 w-4 text-[#2D5A4C] shrink-0" />
                 <div>
-                  <p className="text-[11px] text-neutral-400 uppercase font-mono">Division / Dept</p>
-                  <p className="font-medium text-xs sm:text-sm text-neutral-800 dark:text-white">{item.division}</p>
+                  <p className="text-[11px] text-[#5A625E] uppercase font-mono">Division / Dept</p>
+                  <p className="font-medium text-xs sm:text-sm text-[#1F2421]">{item.division}</p>
                 </div>
               </div>
             )}
@@ -151,8 +151,8 @@ export default function ItemDetailModal({
 
           {item.description && (
             <div>
-              <p className="text-xs font-mono uppercase tracking-wider text-neutral-400 mb-1">Item Description</p>
-              <p className="p-3.5 rounded-xl bg-neutral-50 dark:bg-neutral-800/40 text-xs sm:text-sm leading-relaxed border border-neutral-200/50 dark:border-white/5">
+              <p className="text-xs font-mono uppercase tracking-wider text-[#D95D39] font-bold mb-1">Item Description</p>
+              <p className="p-3.5 rounded-xl bg-white text-xs sm:text-sm leading-relaxed border border-[#E3DCD0] text-[#1F2421]">
                 {item.description}
               </p>
             </div>
@@ -160,7 +160,7 @@ export default function ItemDetailModal({
         </div>
 
         {/* Modal Action Buttons */}
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-neutral-200 dark:border-white/10">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#E3DCD0]">
           
           {/* Delete Option for this item */}
           <div className="flex items-center gap-2">
@@ -170,8 +170,8 @@ export default function ItemDetailModal({
               disabled={isDeleting}
               className={`px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
                 confirmDelete
-                  ? "bg-rose-600 text-white shadow-md shadow-rose-600/30 animate-pulse"
-                  : "bg-rose-500/10 hover:bg-rose-500 text-rose-600 hover:text-white border border-rose-500/20"
+                  ? "bg-[#A83C1D] text-white shadow-xs animate-pulse"
+                  : "badge-alert"
               }`}
             >
               <Trash2 className="h-3.5 w-3.5" />
@@ -181,7 +181,7 @@ export default function ItemDetailModal({
               <button
                 type="button"
                 onClick={() => setConfirmDelete(false)}
-                className="text-xs text-neutral-400 hover:underline cursor-pointer"
+                className="text-xs text-[#5A625E] hover:underline cursor-pointer"
               >
                 Cancel
               </button>
@@ -192,44 +192,41 @@ export default function ItemDetailModal({
           <div className="flex items-center gap-3">
             <button
               onClick={onClose}
-              className="px-4 py-2 rounded-xl border border-neutral-200 dark:border-white/10 text-xs sm:text-sm font-medium hover:bg-neutral-100 dark:hover:bg-white/5 transition-all cursor-pointer"
+              className="btn-tactile-secondary px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold cursor-pointer"
             >
               Close
             </button>
 
             {item.status === "Returned" ? (
-              <div className="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold flex items-center gap-1.5">
+              <div className="px-4 py-2 rounded-full badge-verified text-xs font-semibold flex items-center gap-1.5">
                 <CheckCircle2 className="h-4 w-4" />
                 <span>Returned & Closed</span>
               </div>
             ) : isLost ? (
               isOwner ? (
-                /* The user reported this lost item: DO NOT show "I Found This Item"! */
                 <button
                   onClick={() => {
                     onClose();
                     onOpenMatch?.(item);
                   }}
-                  className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-sky-600/30 flex items-center gap-1.5 transition-all cursor-pointer"
+                  className="btn-tactile-primary px-5 py-2.5 rounded-xl text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 cursor-pointer"
                 >
                   <Sparkles className="h-4 w-4" />
                   <span>Find AI Matches</span>
                 </button>
               ) : (
-                /* Third-party person viewing another student's lost item */
                 <button
                   onClick={() => onClaim(item)}
-                  className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-indigo-600/30 transition-all cursor-pointer"
+                  className="btn-tactile-primary px-5 py-2.5 rounded-xl text-white text-xs sm:text-sm font-bold cursor-pointer"
                 >
                   I Found This Item
                 </button>
               )
             ) : (
-              /* Found item */
               !isOwner && (
                 <button
                   onClick={() => onClaim(item)}
-                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-emerald-600/30 transition-all cursor-pointer"
+                  className="btn-tactile-primary px-5 py-2.5 rounded-xl text-white text-xs sm:text-sm font-bold cursor-pointer"
                 >
                   Claim This Item
                 </button>

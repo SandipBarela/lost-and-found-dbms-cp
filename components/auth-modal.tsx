@@ -30,26 +30,26 @@ export default function AuthModal({ isOpen, initialMode = "login", onClose, onSu
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 editorial-modal-backdrop animate-in fade-in duration-200">
       <div 
-        className="relative w-full max-w-md rounded-3xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-2xl p-6 sm:p-8 text-neutral-900 dark:text-white"
+        className="editorial-modal-container max-w-md w-full p-6 sm:p-8 relative text-[#1F2421]"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-xl text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-white/5 transition-all"
+          className="btn-tactile-secondary absolute top-6 right-6 p-2 text-xs"
         >
-          <X className="h-5 w-5" />
+          <X className="h-4 w-4" />
         </button>
 
         <div className="mb-6">
-          <div className="h-10 w-10 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3">
+          <div className="h-10 w-10 rounded-xl bg-[#F2ECE1] text-[#D95D39] border border-[#E3DCD0] flex items-center justify-center mb-3">
             <Lock className="h-5 w-5" />
           </div>
-          <h3 className="text-2xl font-bold tracking-tight">
+          <h3 className="font-serif text-2xl font-bold tracking-tight text-[#1F2421]">
             {isLogin ? "Welcome Back" : "Student Registration"}
           </h3>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          <p className="text-xs text-[#5A625E] mt-1 font-sans">
             {isLogin 
               ? "Access the campus Lost & Found database with your student credentials."
               : "Register to submit reports and manage your verified claims."}
@@ -59,53 +59,53 @@ export default function AuthModal({ isOpen, initialMode = "login", onClose, onSu
         <form onSubmit={handleSubmit} className="space-y-4">
           {!isLogin && (
             <div>
-              <label className="block text-xs font-medium mb-1.5 text-neutral-700 dark:text-neutral-300">
+              <label className="block text-xs font-semibold mb-1.5 text-[#1F2421]">
                 Full Name
               </label>
               <div className="relative">
-                <User className="absolute left-3.5 top-3 h-4 w-4 text-neutral-400" />
+                <User className="absolute left-3.5 top-3 h-4 w-4 text-[#5A625E]" />
                 <input
                   type="text"
                   required
                   placeholder="e.g. Jane Smith"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-neutral-800/60 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                  className="editorial-input pl-10 pr-3.5 py-2.5 text-sm"
                 />
               </div>
             </div>
           )}
 
           <div>
-            <label className="block text-xs font-medium mb-1.5 text-neutral-700 dark:text-neutral-300">
+            <label className="block text-xs font-semibold mb-1.5 text-[#1F2421]">
               PRN Number / Campus ID
             </label>
             <div className="relative">
-              <ShieldCheck className="absolute left-3.5 top-3 h-4 w-4 text-neutral-400" />
+              <ShieldCheck className="absolute left-3.5 top-3 h-4 w-4 text-[#5A625E]" />
               <input
                 type="text"
                 required
                 placeholder="e.g. 1032210045"
                 value={prn}
                 onChange={(e) => setPrn(e.target.value)}
-                className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-neutral-800/60 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                className="editorial-input pl-10 pr-3.5 py-2.5 text-sm font-mono"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-medium mb-1.5 text-neutral-700 dark:text-neutral-300">
+            <label className="block text-xs font-semibold mb-1.5 text-[#1F2421]">
               Password
             </label>
             <div className="relative">
-              <Lock className="absolute left-3.5 top-3 h-4 w-4 text-neutral-400" />
+              <Lock className="absolute left-3.5 top-3 h-4 w-4 text-[#5A625E]" />
               <input
                 type="password"
                 required
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-neutral-800/60 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                className="editorial-input pl-10 pr-3.5 py-2.5 text-sm"
               />
             </div>
           </div>
@@ -113,18 +113,18 @@ export default function AuthModal({ isOpen, initialMode = "login", onClose, onSu
           <button
             type="submit"
             disabled={submitted}
-            className="w-full mt-2 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/30 transition-all flex items-center justify-center gap-2"
+            className="btn-tactile-primary w-full mt-2 py-3 text-sm flex items-center justify-center gap-2"
           >
             {submitted ? "Authenticating..." : (isLogin ? "Sign In" : "Create Account")}
           </button>
         </form>
 
-        <div className="mt-6 text-center text-xs text-neutral-500">
+        <div className="mt-6 text-center text-xs text-[#5A625E]">
           {isLogin ? "Don't have an account? " : "Already registered? "}
           <button
             type="button"
             onClick={() => setIsLogin(!isLogin)}
-            className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline"
+            className="text-[#D95D39] font-semibold hover:underline cursor-pointer"
           >
             {isLogin ? "Register here" : "Sign In"}
           </button>
