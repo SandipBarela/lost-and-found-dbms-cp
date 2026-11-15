@@ -1,0 +1,29 @@
+{
+  "categories": [
+    "Electronics",
+    "ID Cards & Wallets",
+    "Laptops & Accessories",
+    "Keys & Badges",
+    "Books & Stationery",
+    "Clothing & Bags",
+    "Jewelry & Watches",
+    "Eyewear",
+    "Sports Gear",
+    "Other"
+  ],
+  "locations": [
+    "Library 2nd Floor",
+    "Student Center Cafeteria",
+    "Engineering Hall B-104",
+    "North Parking Lot",
+    "Main Auditorium",
+    "Sports Complex Gymnasium",
+    "Science Block C Ground",
+    "Administrative Counter 1",
+    "Computer Center Lab 3",
+    "Bus Stand Terminal"
+  ],
+  "vision_dim": 512,
+  "hidden_dim": 128,
+  "best_val_loss": 0.1579267789920171
+}

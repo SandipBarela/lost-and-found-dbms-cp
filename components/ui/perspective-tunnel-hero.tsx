@@ -325,9 +325,14 @@ export default function PerspectiveTunnelHero() {
                 style={{ scale: titleScale, opacity: titleOpacity }}
                 className="pointer-events-none z-0 flex flex-col items-center text-center px-6 max-w-xl"
             >
-                <p className="text-xs font-mono uppercase tracking-[0.4em] text-indigo-600 dark:text-indigo-400 mb-4">
-                    Campus Recovery System
-                </p>
+                <div className="flex items-center gap-2 mb-3">
+                    <div className="h-7 w-7 rounded-lg overflow-hidden bg-white shadow-xs p-0.5 border border-neutral-200 dark:border-white/10 shrink-0">
+                        <img src="/reunite-logo.jpg" alt="ReUnite" className="h-full w-full object-contain" />
+                    </div>
+                    <p className="text-xs font-mono uppercase tracking-[0.4em] text-indigo-600 dark:text-indigo-400 font-semibold">
+                        ReUnite • Campus Recovery System
+                    </p>
+                </div>
                 <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tighter leading-[0.9] bg-gradient-to-b from-neutral-950 via-neutral-800 to-neutral-400 dark:from-white dark:via-white dark:to-white/40 bg-clip-text text-transparent">
                     LOST AND
                     <br />

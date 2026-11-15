@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Perspective Tunnel Hero",
-  description: "3D Perspective Tunnel Hero Component",
+  title: "ReUnite | Campus Lost & Found System",
+  description: "ReUnite - Intelligent Campus Lost & Found DBMS with AI matching, claim management, and secure handover.",
 };
 
 export default function RootLayout({

@@ -20,3 +20,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Hide Next.js dev overlay indicator and issue pill */
+nextjs-portal,
+[data-nextjs-toast],
+[data-nextjs-dialog-overlay],
+#nextjs__container_build_error_label {
+  display: none !important;
+}
+
+

@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { LogIn, Sun, Moon, UserCheck } from "lucide-react";
-import AuthModal from "./auth-modal";
+import { LogIn, Sun, Moon, Bell } from "lucide-react";
+import NotificationsModal from "./notifications-modal";
 
 export default function GlobalNavbar() {
     const [theme, setTheme] = useState<"light" | "dark">("light");
-    const [currentUser, setCurrentUser] = useState<{ email: string; role: string; displayName: string } | null>(null);
+    const [currentUser, setCurrentUser] = useState<{ email: string; role: string; displayName: string; prnNumber?: string } | null>(null);
+    const [notifModalOpen, setNotifModalOpen] = useState(false);
 
     useEffect(() => {
         // Theme initialization
@@ -48,30 +49,50 @@ export default function GlobalNavbar() {
 
     const handleLogout = () => {
         localStorage.removeItem("lf_user");
+        sessionStorage.removeItem("lf_session_active");
         window.location.href = "/login";
     };
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-neutral-200/80 dark:border-white/10 bg-white/75 dark:bg-neutral-950/75 backdrop-blur-md transition-all">
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-                <a href="#hero-3d" className="flex items-center gap-3 group">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-500 text-white font-mono text-base font-bold shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-                        LF
+                <a href="#hero-3d" className="flex items-center gap-2.5 group">
+                    <div className="h-10 w-10 rounded-xl overflow-hidden bg-white shadow-sm flex items-center justify-center border border-neutral-200 dark:border-white/10 group-hover:scale-105 transition-transform p-0.5 shrink-0">
+                        <img 
+                            src="/reunite-logo.jpg" 
+                            alt="ReUnite Logo" 
+                            className="h-full w-full object-contain"
+                        />
                     </div>
-                    <span className="text-lg font-bold tracking-tight bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-500 dark:from-white dark:via-neutral-200 dark:to-neutral-400 bg-clip-text text-transparent">
-                        Lost & Found
+                    <span className="text-2xl font-black tracking-tight flex items-center">
+                        <span className="text-[#0f294a] dark:text-[#93c5fd]">Re</span>
+                        <span className="text-[#ea580c] dark:text-[#fb923c]">Unite</span>
                     </span>
                 </a>
 
                 <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-600 dark:text-neutral-400">
                     <a href="#hero" className="hover:text-indigo-600 dark:hover:text-white transition-colors">Home</a>
                     <a href="#how-it-works" className="hover:text-indigo-600 dark:hover:text-white transition-colors">How It Works</a>
-                    <a href="#features" className="hover:text-indigo-600 dark:hover:text-white transition-colors">Features</a>
                     <a href="#recent" className="hover:text-indigo-600 dark:hover:text-white transition-colors">Recent Items</a>
                     <a href="#about" className="hover:text-indigo-600 dark:hover:text-white transition-colors">About</a>
+                    {currentUser?.role === "admin" && (
+                        <a href="/admin" className="px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 text-xs font-medium hover:bg-purple-500/20 transition-colors">
+                            🛡️ Admin Console
+                        </a>
+                    )}
                 </nav>
 
                 <div className="flex items-center gap-3">
+                    {/* Instant Notifications Bell */}
+                    <button
+                        onClick={() => setNotifModalOpen(true)}
+                        aria-label="View Notifications"
+                        className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-white/5 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-white/10 transition-all cursor-pointer"
+                    >
+                        <Bell className="h-4 w-4" />
+                        <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+                    </button>
+
                     {/* Theme Toggle Button */}
                     <button
                         onClick={toggleTheme}
@@ -88,7 +109,9 @@ export default function GlobalNavbar() {
                     {currentUser ? (
                         <div className="flex items-center gap-2">
                             <span className="hidden sm:inline-block text-xs font-mono text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-white/5 px-2.5 py-1.5 rounded-lg border border-neutral-200 dark:border-white/10">
-                                {currentUser.role === "student" ? "🎓 Student" : "💼 Faculty"}: {currentUser.displayName}
+                                {currentUser.role === "admin" 
+                                    ? "🛡️ Admin" 
+                                    : "👤 User"}: {currentUser.displayName}
                             </span>
                             <button
                                 onClick={handleLogout}
@@ -109,7 +132,12 @@ export default function GlobalNavbar() {
                     )}
                 </div>
             </div>
+
+            {/* NOTIFICATIONS MODAL FROM NAVBAR */}
+            <NotificationsModal
+                isOpen={notifModalOpen}
+                onClose={() => setNotifModalOpen(false)}
+            />
         </header>
     );
 }
-

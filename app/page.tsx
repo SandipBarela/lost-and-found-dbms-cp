@@ -11,25 +11,27 @@ export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-    // Check if user is logged in
+    // Check if user has an active session for this visit
+    const sessionActive = sessionStorage.getItem("lf_session_active");
     const user = localStorage.getItem("lf_user");
-    if (!user) {
-      // If not logged in, redirect straight to the login page
+    
+    // If not logged in in this session, always redirect to login page first!
+    if (!sessionActive || !user) {
       router.replace("/login");
     } else {
       setIsAuthenticated(true);
     }
   }, [router]);
 
-  // While checking authentication, show a clean themed loading placeholder
+  // While checking authentication, show clean branded loading screen
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-neutral-950 text-neutral-900 dark:text-white">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-10 w-10 rounded-2xl bg-indigo-600 text-white font-mono font-bold flex items-center justify-center animate-pulse">
+          <div className="h-11 w-11 rounded-2xl bg-indigo-600 text-white font-mono font-bold flex items-center justify-center animate-pulse shadow-lg shadow-indigo-600/30">
             LF
           </div>
-          <p className="text-xs font-mono text-neutral-500">Verifying session...</p>
+          <p className="text-sm font-bold text-neutral-800 dark:text-neutral-200">Checking credentials & entering portal...</p>
         </div>
       </div>
     );
@@ -37,7 +39,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen w-full flex flex-col bg-white dark:bg-neutral-950 transition-colors duration-300">
-      {/* Navbar fixed permanently at the very top throughout animation and main page */}
+      {/* Navbar fixed permanently at the top */}
       <GlobalNavbar />
 
       {/* 3D Perspective Tunnel Hero */}
